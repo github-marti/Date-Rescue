@@ -1,13 +1,13 @@
-var express = require("express");
+let express = require("express");
 require('dotenv').config();
 
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = process.env.PORT || 3001;
+let app = express();
+let PORT = process.env.PORT || 3001;
 
 // Requiring our models for syncing
-var db = require("./models");
+let db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
