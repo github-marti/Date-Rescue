@@ -46,4 +46,5 @@ module.exports = {
         })
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
+        
 }
