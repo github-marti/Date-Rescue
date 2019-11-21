@@ -1,3 +1,4 @@
-let usersController = require("usersController");
+const usersController = require("usersController");
+const eventsController = require("eventsController");
 
-modules.export = usersController;
+modules.export = usersController, eventsController;
