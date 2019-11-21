@@ -3,7 +3,7 @@ const { textsController } = require("../controllers");
 module.exports = function (app) {
     app.post("/api/dates/:dateid/texts", callsController.create);
     app.route("/api/dates/:dateid/texts/:id")
-        .get(textsController.getOne)
+        .get(textsController.findOne)
         .put(textsController.update)
         .delete(textsController.delete)
 }
