@@ -6,5 +6,5 @@ module.exports = function (app) {
     app.get("/dates/:guid", eventsController.getByGUID);
     app.post("/api/dates", eventsController.create);
     app.put("/api/dates/:id", eventsController.update);
-    app.delete("/api/data/:id", eventsController.delete);
+    app.delete("/api/dates/:id", eventsController.delete);
 }
