@@ -25,6 +25,7 @@
     "if-env": "^1.0.4",
     "mysql2": "^2.0.1",
     "passport": "^0.4.0",
-    "sequelize": "^5.21.2"
+    "sequelize": "^5.21.2",
+    "shortid": "^2.2.15"
   }
 }
