@@ -37,7 +37,7 @@ module.exports = {
         .catch(err => res.status(422).send(err))
     },
     update: function (req, res) {
-        db.Locations.findOneAndUpdate(req.body,
+        db.Locations.put(req.body,
             {where: {
                 id: req.params.id,
                 location_like: req.body.location_like,
@@ -46,4 +46,5 @@ module.exports = {
         })
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
-}
+    }
+};
