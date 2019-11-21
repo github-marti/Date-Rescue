@@ -1,6 +1,27 @@
 const db = require("../models");
 
 module.exports = {
+    
+    findAll: function(req, res) {
+        db.Locations.findAll({
+            where: {
+                id: req.params.id
+            }
+        })
+          .sort({ ascend: 1 })
+          .then(results => res.json(results))
+          .catch(err => res.status(422).json(err));
+      },
+    filter: function (req, res) {
+        db.Locations.find({
+            where: {
+                id: req.params.id, 
+                location_city: req.body.location_city
+            }
+        })
+        .then(results => res.json(results))
+        .catch(err => res.status(422).json(err))
+    },
     create: function (req, res) {
         db.Locations.create({
             location_name: req.body.location_name,
@@ -12,25 +33,17 @@ module.exports = {
             location_like: req.body.location_like,
             location_dislike: req.body.location_dislike
         })
-            .then(function () { res.redirect(307, "/api/login") })
-            .catch(function (err) { console.log(err); })
+        .then(results => res.json(results))
+        .catch(err => res.status(422).send(err))
     },
-    logOut: function (req, res) {
-        req.logout();
-        res.redirect("/");
-    },
-    getLocationData: function (req, res) {
-        if (!req.user) {
-            // The user is not logged in, send back an empty object
-            res.json({});
-        } else {
-            // Otherwise send back the user's email and id
-            // Sending back a password, even a hashed password, isn't a good idea
-            res.json({
-                email: req.user.email,
-                username: req.user.username,
-                id: req.user.id
-            })
-        }
-    }
+    update: function (req, res) {
+        db.Locations.findOneAndUpdate(req.body,
+            {where: {
+                id: req.params.id,
+                location_like: req.body.location_like,
+                location_dislike: req.body.location_dislike
+            }
+        })
+        .then(results => res.json(results))
+        .catch(err => res.status(422).send(err))
 }
