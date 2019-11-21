@@ -1,18 +1,14 @@
 module.exports = function (sequelize, DataTypes) {
   let Events = sequelize.define("Events", {
     event_date: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
     event_time: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    event_time_meridiem: {
-      type: DataTypes.STRING,
+      type: DataTypes.TIME,
       allowNull: false,
     },
     event_name: {

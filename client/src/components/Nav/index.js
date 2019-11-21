@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 
 const nav = function () {
 
-    return (
-        
-    );
+    return ;
 };
 
 export default nav;
