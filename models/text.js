@@ -15,20 +15,12 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Text.associate = function (models) {
-    Text.belongsTo(models.Events, {
+    Text.belongsTo(models.Event, {
       foreignKey: {
         allowNull: false
       }
     });
   };
-
-  Text.associate = function (models) {
-    Text.belongsTo(models.Event, {
-      foreignKey: {
-        allowNull: false
-      }
-    })
-  }
 
   return Text;
 };

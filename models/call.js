@@ -15,15 +15,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Call.associate = function (models) {
-    Call.belongsTo(models.Events, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
-
-  Call.associate = function (models) {
-    Call.belongsTo(models.Events, {
+    Call.belongsTo(models.Event, {
       foreignKey: {
         allowNull: false
       }

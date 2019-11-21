@@ -40,6 +40,14 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Events.associate = function (models) {
+    Events.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    })
+  }
+
+  Events.associate = function (models) {
     Events.hasOne(models.Call, {
       onDelete: 'cascade'
     });
@@ -50,5 +58,6 @@ module.exports = function (sequelize, DataTypes) {
       onDelete: 'cascade'
     });
   };
+  
   return Events;
 };
