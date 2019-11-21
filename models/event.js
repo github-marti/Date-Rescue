@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   let Events = sequelize.define("Events", {
     event_date: {
       type: DataTypes.DATEONLY,
@@ -28,21 +28,23 @@ module.exports = function(sequelize, DataTypes) {
     event_date_picture: {
       type: DataTypes.STRING,
       allowNull: true,
-      }
     },
-    {timestamps: false
+    shortid: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
+
+  Events.associate = function (models) {
+    Events.hasOne(models.Call, {
+      onDelete: 'cascade'
     });
+  };
 
-    Events.associate = function(models) {
-      Events.hasOne(models.Call, {
-        onDelete: 'cascade'
-      });
-    };
-
-    Events.associate = function(models) {
-      Events.hasOne(models.Text, {
-        onDelete: 'cascade'
-      });
-    };
+  Events.associate = function (models) {
+    Events.hasOne(models.Text, {
+      onDelete: 'cascade'
+    });
+  };
   return Events;
 };
