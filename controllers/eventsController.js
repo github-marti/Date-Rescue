@@ -1,4 +1,5 @@
 const db = require("../models");
+const shortid = require('shortid');
 
 module.exports = {
     getAll: function (req, res) {
@@ -48,6 +49,7 @@ module.exports = {
             event_name: req.body.event_name,
             event_location: req.body.event_location,
             event_date_picture: req.body.event_date_picture,
+            shortid: shortid.generate(),
             createdAt: new Date(),
             updatedAt: new Date()
         })
