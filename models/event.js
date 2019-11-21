@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  let Events = sequelize.define("Events", {
+  let Event = sequelize.define("Event", {
     event_date: {
       type: DataTypes.DATEONLY,
       allowNull: false,
@@ -35,25 +35,25 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  Events.associate = function (models) {
-    Events.belongsTo(models.User, {
+  Event.associate = function (models) {
+    Event.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
     })
   }
 
-  Events.associate = function (models) {
-    Events.hasOne(models.Call, {
+  Event.associate = function (models) {
+    Event.hasOne(models.Call, {
       onDelete: 'cascade'
     });
   };
 
-  Events.associate = function (models) {
-    Events.hasOne(models.Text, {
+  Event.associate = function (models) {
+    Event.hasOne(models.Text, {
       onDelete: 'cascade'
     });
   };
   
-  return Events;
+  return Event;
 };
