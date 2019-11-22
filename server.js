@@ -1,15 +1,16 @@
-let express = require("express");
+const express = require("express");
 require('dotenv').config();
 
-var passport = require("./config/passport");
+const passport = require("./config/passport");
+const bodyParser = require("body-parser");
 
 // Sets up the Express App
 // =============================================================
-let app = express();
-let PORT = process.env.PORT || 3001;
+const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Requiring our models for syncing
-let db = require("./models");
+const db = require("./models");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser());
 
 // Static directory
 app.use(express.static("public"));
