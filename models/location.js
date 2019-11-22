@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    let Locations = sequelize.define("Locations", {
+    let Location = sequelize.define("Location", {
       location_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -49,5 +49,5 @@ module.exports = function(sequelize, DataTypes) {
       }},
       {timestamps: false
       });
-      return Locations
+      return Location
     }
