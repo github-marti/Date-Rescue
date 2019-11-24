@@ -37,7 +37,7 @@ module.exports = {
         .catch(err => res.status(422).send(err))
     },
     update: function (req, res) {
-        db.Locations.put(req.body,
+        db.Locations.update(req.body,
             {where: {
                 id: req.params.id,
                 location_like: req.body.location_like,

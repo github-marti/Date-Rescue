@@ -59,7 +59,7 @@ module.exports = {
     uploadImage: function (req, res) {
         if (req.file) {
             let filename = req.file.filename;
-            db.Events.put({ event_date_picture : `/images/${filename}` }, { where: { id: req.params.id }})
+            db.Events.update({ event_date_picture : `/images/${filename}` }, { where: { id: req.params.id }})
             .then(results => res.json(results))
             .catch(err => res.status(422).send(err))
         } else {
@@ -67,7 +67,7 @@ module.exports = {
         }
     },
     update: function (req, res) {
-        db.Events.put(req.body, {where: {id: req.params.id}})
+        db.Events.update(req.body, {where: {id: req.params.id}})
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
     },

@@ -7,5 +7,5 @@ module.exports = function (app) {
   });
   app.post("/api/signup", usersController.create);
   app.get("/logout", usersController.logOut);
-  app.get("/api/user_data", userController.getUserData);
+  app.get("/api/user_data", usersController.getUserData);
 };
