@@ -2,9 +2,10 @@ const { eventsController } = require("../controllers");
 const shortid = require('shortid');
 const mime = require('mime');
 const multer = require('multer');
+const appRoot = require('app-root-path');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'public/images')
+      cb(null, appRoot + '/client/public/images')
     },
     filename: (req, file, cb) => {
       cb(null, file.fieldname + '-' + shortid.generate() + '.' + mime.getExtension(file.mimetype))

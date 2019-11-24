@@ -116,14 +116,7 @@ const reducer = (state, action) => {
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     username: "",
-    currentEvent: {
-        id: 0,
-        event_name: "",
-        event_date: "",
-        event_time: "",
-        event_location: "",
-        event_date_picture: ""
-    },
+    currentEvent: {},
     pastEvents: [],
     upcomingCall: {},
     upcomingText: {},
