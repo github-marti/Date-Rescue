@@ -1,6 +1,6 @@
 const express = require("express");
 require('dotenv').config();
-
+const session = require("express-session");
 const passport = require("./config/passport");
 const bodyParser = require("body-parser");
 
@@ -27,9 +27,11 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./routes/")(app);
-require("./routes/")(app);
-require("./routes/")(app);
+require("./routes/call-api-routes")(app);
+require("./routes/event-api-routes")(app);
+require("./routes/location-api-routes")(app);
+require("./routes/text-api-routes")(app);
+require("./routes/user-api-routes")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

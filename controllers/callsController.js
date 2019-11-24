@@ -12,7 +12,7 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     update: function (req, res) {
-        db.Calls.put(req.body, {where: {id: req.params.id, EventId: req.params.dateid}})
+        db.Calls.update(req.body, {where: {id: req.params.id, EventId: req.params.dateid}})
         .then(results => res.json(results))
         .catch(err => res.status(422).json(err))
     },
