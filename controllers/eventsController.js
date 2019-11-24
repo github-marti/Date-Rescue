@@ -3,7 +3,7 @@ const shortid = require('shortid');
 
 module.exports = {
     getAll: function (req, res) {
-        db.Events.findAll({
+        db.Event.findAll({
             where: {
                 UserId: req.params.userid
             }
@@ -12,7 +12,7 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     getOne: function (req, res) {
-        db.Events.findOne({
+        db.Event.findOne({
             where: {
                 id: req.params.id, UserId: req.params.userid
             }
@@ -21,7 +21,7 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     getByGUID: function (req, res) {
-        db.Events.findOne({
+        db.Event.findOne({
             where: {
                 guid: req.params.guid
             }
@@ -43,7 +43,6 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     create: function (req, res) {
-        console.log('create started');
         db.Event.create({
             event_date: req.body.event_date,
             event_time: req.body.event_time,
@@ -62,22 +61,32 @@ module.exports = {
     },
     uploadImage: function (req, res) {
         if (req.file) {
+            console.log("req.file detected");
             let filename = req.file.filename;
-            db.Events.update({ event_date_picture : `/images/${filename}` }, { where: { id: req.params.id }})
+            db.Event.update({ event_date_picture : `/images/${filename}` }, { where: { id: req.params.id }})
             .then(results => res.json(results))
-            .catch(err => res.status(422).send(err))
+            .catch(err => {
+                console.log(err);
+                res.send(err);
+            })
         } else {
             res.send("File was not uploaded.")
         }
     },
     update: function (req, res) {
-        db.Events.update(req.body, {where: {id: req.params.id}})
+        db.Event.update(req.body, {where: {id: req.params.id}})
         .then(results => res.json(results))
-        .catch(err => res.status(422).send(err))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
     },
     delete: function (req, res) {
-        db.Events.destroy({where: {id: req.params.id}})
+        db.Event.destroy({where: {id: req.params.id}})
         .then(results => res.json(results))
-        .catch(err => res.status(422).send(err))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
     }
 }
