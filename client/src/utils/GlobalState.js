@@ -46,7 +46,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentEvent: {
-          ...currentEvent,
+          ...state.currentEvent,
           [action.column]: action.update
         }
       }
@@ -56,7 +56,7 @@ const reducer = (state, action) => {
         ...state,
         currentEvent: {},
         pastEvents: [
-          ...pastEvents,
+          ...state.pastEvents,
           action.completedEvent
         ]
       }
@@ -73,7 +73,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         locations: [
-          ...locations,
+          ...state.locations,
           action.newLocation
         ]
       }
@@ -118,11 +118,11 @@ const StoreProvider = ({ value = [], ...props }) => {
     username: "",
     currentEvent: {
         id: 0,
-        eventName: "",
-        eventDate: "",
-        eventTime: "",
-        eventLocation: "",
-        eventPicture: ""
+        event_name: "",
+        event_date: "",
+        event_time: "",
+        event_location: "",
+        event_date_picture: ""
     },
     pastEvents: [],
     upcomingCall: {},

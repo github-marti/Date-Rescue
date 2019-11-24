@@ -43,7 +43,8 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     create: function (req, res) {
-        db.Events.create({
+        console.log('create started');
+        db.Event.create({
             event_date: req.body.event_date,
             event_time: req.body.event_time,
             event_name: req.body.event_name,
@@ -54,7 +55,10 @@ module.exports = {
             updatedAt: new Date()
         })
         .then(results => res.json(results))
-        .catch(err => res.status(422).send(err))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
     },
     uploadImage: function (req, res) {
         if (req.file) {

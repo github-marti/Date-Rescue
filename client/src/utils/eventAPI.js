@@ -18,13 +18,13 @@ export default {
         return axios.post("/api/events", eventData);
     },
     // Saves image to public/images
-    saveImage: function (eventid) {
+    saveImage: function (eventid, formData) {
         return axios.post(`/api/events/${eventid}/images/upload`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
     },
     // Updates existing event with given information
-    updateEvent: function (eventid) {
+    updateEvent: function (eventid, eventData) {
         return axios.put(`/api/events/${eventid}`, eventData);
     },
     // Deletes event by id
