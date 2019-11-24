@@ -10,11 +10,7 @@ function CreateEvent() {
 
     const [state, dispatch] = useStoreContext();
     const nameRef = useRef();
-    const dateRef = useRef();
-    const timeRef = useRef();
     const locationRef = useRef();
-
-    console.log('state', state);
 
     const handleDateChange = date => {
         dispatch({
@@ -32,43 +28,27 @@ function CreateEvent() {
         })
     };
 
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async event => {
         event.preventDefault();
-        API.saveEvent({
+        let initialEvent = await API.saveEvent({
             event_name: nameRef.current.value,
             event_date: state.currentEvent.event_date,
             event_time: state.currentEvent.event_time,
             event_location: locationRef.current.value
-        })
-            .then(results => {
-                console.log('results', results);
-                let eventid = results.data.id;
-                let eventImage = document.getElementById('event_image').files[0];
-                if (eventImage) {
-                    let formData = new FormData();
-                    formData.append("image", eventImage);
-                    API.saveImage(eventid, formData)
-                        .then(results => {
-                            console.log('results', results);
-                            let filePath = results.data.filepath;
-                            console.log("filepath", filePath);
-                            API.updateEvent({ event_date_picture: filePath })
-                                .then(results => {
-                                    dispatch({
-                                        type: SET_CURRENT_EVENT,
-                                        newEvent: results.data
-                                    });
-                                });
-                        });
-                } else {
-                    console.log('no image selected');
-                    console.log(results);
-                    dispatch({
-                        type: SET_CURRENT_EVENT,
-                        newEvent: results.data
-                    })
-                }
-            });
+        });
+        dispatch({
+            type: SET_CURRENT_EVENT,
+            newEvent: initialEvent.data
+        });
+        let eventImage = document.getElementById('event_image').files[0];
+        let eventid = initialEvent.data.id
+        // proceed to save image and update event with image link if image is detected
+        if (eventImage) {
+            let formData = new FormData();
+            formData.append("image", eventImage);
+            let imageData = await API.saveImage(eventid, formData);
+            console.log(imageData);
+        }
     }
 
     return (
@@ -76,9 +56,9 @@ function CreateEvent() {
             <form onSubmit={handleFormSubmit}>
                 <input type="text" required ref={nameRef} />
                 <br />
-                <DatePicker ref={dateRef} value={state.currentEvent.event_date ? new Date(state.currentEvent.event_date) : null} onChange={handleDateChange}/>
+                <DatePicker value={state.currentEvent.event_date ? new Date(state.currentEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()}/>
                 <br />
-                <TimePicker ref={timeRef} onChange={handleTimeChange}/>
+                <TimePicker onChange={handleTimeChange} disableClock={true}/>
                 <br />
                 <input type="text" required ref={locationRef} />
                 <br />
