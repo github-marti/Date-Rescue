@@ -1,0 +1,12 @@
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const SET_CURRENT_EVENT = 'SET_CURRENT_EVENT';
+export const SET_PAST_EVENTS = 'SET_PAST_EVENTS';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
+export const CANCEL_EVENT = 'CANCEL_EVENT';
+export const REMOVE_EVENT = 'REMOVE_EVENT';
+export const COMPLETE_EVENT = 'COMPLETE_EVENT';
+export const ADD_LOCATION = 'ADD_LOCATION';
+export const ADD_LIKE = 'ADD_LIKE';
+export const ADD_DISLIKE = 'ADD_DISLIKE';
+export const REMOVE_LOCATION = 'REMOVE_LOCATION';
