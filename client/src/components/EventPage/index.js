@@ -7,6 +7,7 @@ class EventPage extends React.Component {
         event_date: "",
         event_time: "",
         event_location: "",
+        event_note: "",
         event_date_picture: ""
     }
 
@@ -19,6 +20,7 @@ class EventPage extends React.Component {
             event_date: eventData.data.event_date,
             event_time: eventData.data.event_time,
             event_location: eventData.data.event_location,
+            event_note: eventData.data.event_note,
             event_date_picture: eventData.data.event_date_picture
         })
     }
@@ -31,6 +33,7 @@ class EventPage extends React.Component {
                     <p>Date: {this.state.event_date}</p>
                     <p>Time: {this.state.event_time}</p>
                     <p>Location: {this.state.event_location}</p>
+                    <p>Note: {this.state.event_note}</p>
                     <iframe width="300" height="200" frameborder="0"
                         src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowfullscreen></iframe>
                     <p><img width="200" src={this.state.event_date_picture}></img></p>
@@ -38,7 +41,11 @@ class EventPage extends React.Component {
             )
         } else {
             return (
-                <h1>Sorry, this event has expired!</h1>
+                <div>
+                    <h1>Sorry, this event address is either invalid or has expired.</h1>
+                    <h3>If you think there's been some sort of mistake, ask your friend to resend their unique event address,
+                    or if this is your event, login to Date Rescue and double-check the address is correct.</h3>
+                </div>
             )
         }
     }
