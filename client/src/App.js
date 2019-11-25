@@ -1,31 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Home from "./pages/Home";
-// import Detail from "./pages/Detail";
-// import NoMatch from "./pages/NoMatch";
 // import Nav from "./components/Nav";
 import Login from "./components/login";
-// import { StoreProvider } from "./utils/GlobalState";
-// import FavoritesList from "./pages/FavoritesList";
+import CreateEvent from "./components/CreateEvent";
+import EventPage from "./components/EventPage";
+import { StoreProvider } from "./utils/GlobalState";
 
 function App() {
   return (
     <Router>
       <div>
-        
-        <Login>
-
-        </Login>
-        {/* <StoreProvider> */}
+        <StoreProvider>
           {/* <Nav /> */}
-          {/* <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/favorites" component={FavoritesList} />
-            <Route exact path="/posts/:id" component={Detail} />
-            <Route component={NoMatch} />
-          </Switch> */}
-        {/* </StoreProvider> */}
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/events/:shortid" component={EventPage} />
+            <Route exact path="/event/create" component={CreateEvent} />
+            <Route component={Login} />
+          </Switch>
+        </StoreProvider>
       </div>
     </Router>
   );
