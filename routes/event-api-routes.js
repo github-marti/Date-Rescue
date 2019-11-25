@@ -16,7 +16,7 @@ const upload = multer({storage: storage});
 module.exports = function (app) {
     app.get("/api/users/:userid/events", eventsController.getAll);
     app.get("/api/users/:userid/events/:id", eventsController.getOne);
-    app.get("/events/:guid", eventsController.getByGUID);
+    app.get("/events/:shortid", eventsController.getByShortId);
     app.post("/api/events", eventsController.create);
     app.post("/api/events/:id/images/upload", upload.single('image'), eventsController.uploadImage);
     app.put("/api/events/:id", eventsController.update);

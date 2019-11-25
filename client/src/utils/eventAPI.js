@@ -10,8 +10,8 @@ export default {
         return axios.get(`/api/users/${userid}/events/${eventid}`);
     },
     // Deletes the post with the given id
-    getEventByGUIDt: function (guid) {
-        return axios.get(`/events/${guid}`);
+    getEventByShortId: function (shortid) {
+        return axios.get(`/events/${shortid}`);
     },
     // Saves an event to the database
     saveEvent: function (eventData) {
