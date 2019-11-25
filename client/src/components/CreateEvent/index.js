@@ -67,7 +67,8 @@ function CreateEvent() {
             event_name: state.currentEvent.event_name,
             event_date: state.currentEvent.event_date,
             event_time: state.currentEvent.event_time,
-            event_location: state.currentEvent.event_location
+            event_location: state.currentEvent.event_location,
+            UserId: 1
         });
         dispatch({
             type: SET_CURRENT_EVENT,
