@@ -30,7 +30,9 @@ class EventPage extends React.Component {
                 <p>Date: {this.state.event_date}</p>
                 <p>Time: {this.state.event_time}</p>
                 <p>Location: {this.state.event_location}</p>
-                <p><img src={this.state.event_date_picture}></img></p>
+                <iframe width="300" height="200" frameborder="0"
+                    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowfullscreen></iframe>
+                <p><img width="200" src={this.state.event_date_picture}></img></p>
             </div>
         )
     }
