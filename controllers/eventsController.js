@@ -52,6 +52,7 @@ module.exports = {
             event_time: req.body.event_time,
             event_name: req.body.event_name,
             event_location: req.body.event_location,
+            event_note: req.body.event_note,
             event_date_picture: req.body.event_date_picture,
             shortid: shortid.generate(),
             createdAt: new Date(),
