@@ -1,6 +1,6 @@
-import React from './node_modules/react';
-import ReactDOM from './node_modules/react-dom';
-import { Container, Col, Form, FormGroup, Label, Input, Button, } from './node_modules/reactstrap';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
 import "./style.css";
 
 const login = function () {
