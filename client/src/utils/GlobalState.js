@@ -9,8 +9,7 @@ import {
   COMPLETE_EVENT,
   ADD_LOCATION,
   ADD_LIKE,
-  ADD_DISLIKE,
-  REMOVE_LOCATION
+  ADD_DISLIKE
 } from './actions';
 
 const StoreContext = createContext();
