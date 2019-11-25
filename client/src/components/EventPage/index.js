@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import API from '../../utils/eventAPI'
 
 class EventPage extends React.Component {
