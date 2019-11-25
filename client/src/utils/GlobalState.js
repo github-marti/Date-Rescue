@@ -99,14 +99,6 @@ const reducer = (state, action) => {
           return location
         })
       }
-
-      case REMOVE_LOCATION:
-        return {
-          ...state,
-          locations: state.locations.filter(location => {
-            return location.id !== action.id
-          })
-        }
       
       default:
         return state;

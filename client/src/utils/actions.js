@@ -9,4 +9,3 @@ export const COMPLETE_EVENT = 'COMPLETE_EVENT';
 export const ADD_LOCATION = 'ADD_LOCATION';
 export const ADD_LIKE = 'ADD_LIKE';
 export const ADD_DISLIKE = 'ADD_DISLIKE';
-export const REMOVE_LOCATION = 'REMOVE_LOCATION';
