@@ -68,6 +68,7 @@ function CreateEvent() {
             event_date: state.currentEvent.event_date,
             event_time: state.currentEvent.event_time,
             event_location: state.currentEvent.event_location,
+            event_note: state.currentEvent.event_note,
             UserId: 1
         });
         dispatch({
@@ -95,6 +96,8 @@ function CreateEvent() {
                 <TimePicker onChange={handleTimeChange} disableClock={true} />
                 <br />
                 <Search handleInputChange={handleInputChange} handleScriptLoad={handleScriptLoad} location={state.currentEvent.event_location}/>
+                <br />
+                <textarea name="event_note" onChange={handleInputChange} />
                 <br />
                 <input type="file" id="event_image" />
                 <br />

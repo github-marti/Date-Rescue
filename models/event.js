@@ -29,6 +29,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    event_note: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     shortid: {
       type: DataTypes.STRING,
       allowNull: false
