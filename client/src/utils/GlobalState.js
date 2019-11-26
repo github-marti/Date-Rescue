@@ -9,8 +9,7 @@ import {
   COMPLETE_EVENT,
   ADD_LOCATION,
   ADD_LIKE,
-  ADD_DISLIKE,
-  REMOVE_LOCATION
+  ADD_DISLIKE
 } from './actions';
 
 const StoreContext = createContext();
@@ -100,17 +99,9 @@ const reducer = (state, action) => {
           return location
         })
       }
-
-    case REMOVE_LOCATION:
-      return {
-        ...state,
-        locations: state.locations.filter(location => {
-          return location.id !== action.id
-        })
-      }
-
-    default:
-      return state;
+      
+      default:
+        return state;
   }
 };
 
