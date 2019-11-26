@@ -1,21 +1,25 @@
-import React from "react";
-// import ReactDOM from "react-dom"
-import { useStoreContext } from "../../utils/GlobalState";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-function Nav() {
-  // const [post] = useStoreContext();
-  return (
-<ul className="nav nav-tabs">
-  <li className="nav-item">
-    <a className="nav-link active" href="www.google.com">Create-A-Date</a>
-  </li>
-  <li className="nav-item">
-    <a className="nav-link" href="www.google.com">View a past date</a>
-  </li>
-
-</ul>
-
-  );
+const NavTop = function () {
+    return (
+        <div>
+            <Navbar color="light" light expand="md">
+                <Nav className="mr-auto" navbar>
+                    <NavItem>
+                        <NavLink href="./components/Home">Home</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="./components/location">Location</NavLink>
+                    </NavItem>
+                    <NavItem className="signOut">
+                        <NavLink href="">Log Out</NavLink>
+                    </NavItem>
+                </Nav>
+            </Navbar>
+        </div>
+    );
 }
-// useStoreContext.render(<Nav />, document.getElementById("root"))
-export default Nav;
+
+export default NavTop;
