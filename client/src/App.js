@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Nav from "./components/Nav";
+import Nav from "./components/Nav";
 import Login from "./components/Login";
 import CreateEvent from "./components/CreateEvent";
 import EventPage from "./components/EventPage";
@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div>
         <StoreProvider>
-          {/* <Nav /> */}
+          <Nav />
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={SignUp} />
