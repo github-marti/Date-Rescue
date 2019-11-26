@@ -1,48 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import "./style.css";
 import axios from 'axios';
 
-class SignUp extends React.Component {
+function SignUp() {
 
-  state = {
-    email: "",
-    username: "",
-    password: "",
-    phoneNumber: ""
-  }
+  const [user, setUser] = useState({})
+  const [redirect, setRedirect] = useState(false);
 
-  handleInputChange = event => {
+  useEffect(() => {
+    console.log('signup')
+  }, [redirect]);
+
+  const handleInputChange = event => {
     let name = event.target.name.trim();
     let value = event.target.value.trim();
-    this.setState({
+    setUser({
+      ...user,
       [name]: value
-    })
-  }
+    });
+  };
 
-  handleFormSubmit = event => {
+  const handleFormSubmit = event => {
     event.preventDefault();
-    let userData = this.state;
-    if (!this.state.email || !this.state.username || !this.state.password || !this.state.phoneNumber) {
+    let userData = user;
+    if (!user.email || !user.username || !user.password || !user.phoneNumber) {
       return;
     }
     axios.post('/api/signup', userData)
       .then(() => {
         console.log('signup successful!');
+        setRedirect(true);
       })
       .catch(err => {
         console.log(err);
       });
-    this.setState({});
+  };
+
+  const renderRedirect = () => {
+    if (redirect) {
+      return <Redirect to='/login' />
+    }
   }
 
-  render() {
-    return (
+  return (
+    <div>
+      {renderRedirect()}
       <body className="bcg">
         <Container className="signUp">
           <row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
-              <Form className="form" onSubmit={this.handleFormSubmit}>
+              <Form className="form" onSubmit={handleFormSubmit}>
                 <Col>
                   <h2>Sign Up</h2>
                 </Col>
@@ -53,8 +62,7 @@ class SignUp extends React.Component {
                       type="email"
                       name="email"
                       id="email"
-                      value={this.state.email}
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -63,8 +71,7 @@ class SignUp extends React.Component {
                       type="text"
                       name="username"
                       id="username"
-                      value={this.state.username}
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -73,8 +80,7 @@ class SignUp extends React.Component {
                       type="password"
                       name="password"
                       id="examplePassword"
-                      value={this.state.password}
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                     />
                   </FormGroup>
                   <FormGroup>
@@ -83,8 +89,7 @@ class SignUp extends React.Component {
                       type="tel"
                       name="phoneNumber"
                       id="phoneNumber"
-                      value={this.state.phoneNumber}
-                      onChange={this.handleInputChange}
+                      onChange={handleInputChange}
                     />
                   </FormGroup>
                 </Col>
@@ -94,8 +99,8 @@ class SignUp extends React.Component {
           </row>
         </Container>
       </body>
-    );
-  }
+    </div>
+  );
 };
 
 export default SignUp;

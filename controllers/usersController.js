@@ -8,8 +8,8 @@ module.exports = {
             phoneNumber: req.body.phoneNumber,
             password: req.body.password
         })
-            .then(function () { res.redirect(307, "/api/login") })
-            .catch(function (err) { console.log(err); })
+            .then(results => res.send(results.data))
+            .catch(err => { console.log(err); })
     },
     logOut: function (req, res) {
         req.logout();
