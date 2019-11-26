@@ -6,14 +6,14 @@ import CreateEvent from "./components/CreateEvent";
 import EventPage from "./components/EventPage";
 import SignUp from "./components/SignUp";
 import { StoreProvider } from "./utils/GlobalState";
-import Nav from "./components/Nav";
+import EventTab from "./components/EventTab";
 
 function App() {
   return (
     <Router>
       <div>
         <StoreProvider>
-          <Nav />
+          <EventTab />
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={SignUp} />
