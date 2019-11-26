@@ -21,7 +21,8 @@ const reducer = (state, action) => {
     case LOGIN_USER:
       return {
         ...state,
-        username: action.username
+        username: action.username,
+        userid: action.userid
       }
     
     case LOGOUT_USER:
@@ -116,6 +117,8 @@ const reducer = (state, action) => {
 const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     username: "",
+    userid: 0,
+    authenticated: false,
     currentEvent: {},
     pastEvents: [],
     upcomingCall: {},
