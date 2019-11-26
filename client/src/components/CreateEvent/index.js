@@ -40,27 +40,6 @@ function CreateEvent() {
         });
     };
 
-    const handleScriptLoad = () => {
-        /*global google*/ // To disable any eslint 'google not defined' errors
-        state.autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete')
-        );
-        state.autocomplete.setFields(['formatted_address', 'name']);
-        state.autocomplete.addListener('place_changed', handlePlaceSelect);
-    };
-
-    const handlePlaceSelect = () => {
-        const addressObject = state.autocomplete.getPlace();
-        const address = addressObject.formatted_address;
-        if (address) {
-            dispatch({
-                type: UPDATE_EVENT,
-                column: 'event_location',
-                update: `${addressObject.name}, ${address}`
-            });
-        };
-    };
-
     const handleFormSubmit = async event => {
         event.preventDefault();
         let initialEvent = await API.saveEvent({
@@ -95,7 +74,7 @@ function CreateEvent() {
                 <br />
                 <TimePicker onChange={handleTimeChange} disableClock={true} />
                 <br />
-                <Search handleInputChange={handleInputChange} handleScriptLoad={handleScriptLoad} location={state.currentEvent.event_location}/>
+                <Search handleInputChange={handleInputChange}/>
                 <br />
                 <textarea name="event_note" onChange={handleInputChange} />
                 <br />
