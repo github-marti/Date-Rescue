@@ -1,16 +1,20 @@
 import React from 'react';
 import API from '../../utils/locationAPI';
+import FormData from 'form-data';
 
 function CreateLocation() {
 
     const handleFormSubmit = event => {
         event.preventDefault();
-        const data = new FormData(event.target);
-
-        fetch(API.saveLocation(), {
-            method: 'POST',
-            body: data,
-        })
+        let data = new FormData(event.target);
+        
+        let obj = {}
+        for(let p of data) {
+            console.log(p[0],p[1]);
+            obj[p[0]] = p[1];
+        }
+        console.log(obj)
+        API.saveLocation(obj);
     }
 
     return (
@@ -42,16 +46,16 @@ function CreateLocation() {
                 </div>
                 <fieldset class="form-group">
                     <div class="row">
-                        <legend class="col-form-label col-sm-2 pt-0">Does this location have angel shots?</legend>
+                        <legend class="col-form-label col-sm-2 pt-0">Angel shots available?</legend>
                         <div class="col-sm-10">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="angel_shot" value="option1" checked />
+                                <input class="form-check-input" type="radio" name="angel_shot" id="angel_shot" value="Yes" />
                                 <label class="form-check-label" htmlFor="angel_shot">
                                     Yes
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="angel_shot" value="option2" />
+                                <input class="form-check-input" type="radio" name="angel_shot" id="angel_shot" value="No" />
                                 <label class="form-check-label" htmlFor="angel_shot">
                                     No
                                 </label>
