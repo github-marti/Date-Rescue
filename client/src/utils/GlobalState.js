@@ -39,7 +39,7 @@ const reducer = (state, action) => {
     case SET_PAST_EVENTS:
       return {
         ...state,
-        pastEvents: action.PastEvents
+        pastEvents: action.pastEvents
       }
 
     case UPDATE_EVENT:
