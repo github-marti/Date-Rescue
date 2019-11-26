@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
 import FormData from 'form-data';
@@ -9,10 +10,11 @@ import { SET_CURRENT_EVENT, UPDATE_EVENT } from '../../utils/actions';
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         console.log('state', state);
-    }, [state.currentEvent.event_location]);
+    }, [redirect]);
 
     const handleInputChange = event => {
         let name = event.target.name;
@@ -61,12 +63,21 @@ function CreateEvent() {
             let formData = new FormData();
             formData.append("image", eventImage);
             let imageData = await API.saveImage(eventid, formData);
-            console.log(imageData);
+            if (imageData.data) {
+                setRedirect(true);
+            }
         }
     }
 
+    const renderRedirect = () => {
+        if (redirect) {
+            return <Redirect to="/event/upcoming" />
+        }
+    };
+
     return (
         <div className="App">
+            {renderRedirect()}
             <form onSubmit={handleFormSubmit}>
                 <input type="text" name="event_name" required onChange={handleInputChange} />
                 <br />
