@@ -23,7 +23,7 @@ const reducer = (state, action) => {
         username: action.username,
         userid: action.userid
       }
-    
+
     case LOGOUT_USER:
       return {
         ...state,
@@ -68,7 +68,7 @@ const reducer = (state, action) => {
           return action.id !== event.id
         })
       }
-    
+
     case ADD_LOCATION:
       return {
         ...state,
@@ -77,7 +77,7 @@ const reducer = (state, action) => {
           action.newLocation
         ]
       }
-    
+
     case ADD_LIKE:
       return {
         ...state,
@@ -88,8 +88,8 @@ const reducer = (state, action) => {
           return location
         })
       }
-    
-      case ADD_DISLIKE:
+
+    case ADD_DISLIKE:
       return {
         ...state,
         locations: state.locations.map(location => {
@@ -115,16 +115,24 @@ const StoreProvider = ({ value = [], ...props }) => {
     upcomingCall: {},
     upcomingText: {},
     locations: [{
-        id: 0,
-        locationName: "",
-        locationAddress: "",
-        locationCity: "",
-        locationState: "",
-        locationZip: "",
-        angelShot: "",
-        likes: 0,
-        dislikes: 0
-    }]
+      id: 0,
+      locationName: "",
+      locationAddress: "",
+      locationCity: "",
+      locationState: "",
+      locationZip: "",
+      angelShot: "",
+      likes: 0,
+      dislikes: 0
+    }],
+    formatTime: time => {
+      let hour = time.split(':')[0];
+      if (hour.charAt(0) === '0') {
+        hour = hour.substring(1);
+      }
+      let minutes = time.split(':')[1];
+      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+    }
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

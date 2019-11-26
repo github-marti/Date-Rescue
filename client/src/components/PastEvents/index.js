@@ -18,15 +18,6 @@ function PastEvents() {
             })
     }, []);
 
-    const formatTime = time => {
-        let hour = time.split(':')[0];
-        if (hour.charAt(0) === '0') {
-            hour = hour.substring(1);
-        }
-        let minutes = time.split(':')[1];
-        return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
-    }
-
     return (
         <div>
             {state.pastEvents.map(event => {
@@ -38,7 +29,6 @@ function PastEvents() {
                 event_location={event.event_location}
                 event_note={event.event_note}
                 event_date_picture={event.event_date_picture}
-                formatTime={formatTime}
                 />
             })}
         </div>
