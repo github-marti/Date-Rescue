@@ -3,7 +3,7 @@ const db = require("../models");
 module.exports = {
     
     findAll: function(req, res) {
-        db.Locations.findAll({
+        db.Location.findAll({
             where: {
                 id: req.params.id
             }
@@ -13,7 +13,7 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       },
     filter: function (req, res) {
-        db.Locations.find({
+        db.Location.find({
             where: {
                 id: req.params.id, 
                 location_city: req.body.location_city
@@ -23,7 +23,7 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     create: function (req, res) {
-        db.Locations.create({
+        db.Location.create({
             location_name: req.body.location_name,
             location_address: req.body.location_address,
             location_city: req.body.location_city,
@@ -37,7 +37,7 @@ module.exports = {
         .catch(err => res.status(422).send(err))
     },
     update: function (req, res) {
-        db.Locations.update(req.body,
+        db.Location.update(req.body,
             {where: {
                 id: req.params.id,
                 location_like: req.body.location_like,
