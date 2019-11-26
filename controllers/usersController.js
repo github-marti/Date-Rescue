@@ -8,7 +8,7 @@ module.exports = {
             phoneNumber: req.body.phoneNumber,
             password: req.body.password
         })
-            .then(function () { res.redirect(307, "/api/login") })
+            .then(function () { res.redirect(301, "/event/create") })
             .catch(function (err) { console.log(err); })
     },
     logOut: function (req, res) {
