@@ -5,8 +5,12 @@ module.exports = {
     getAll: function (req, res) {
         db.Event.findAll({
             where: {
-                UserId: req.params.userid
-            }
+                UserId: req.user.id
+            },
+            order: [
+                ['event_date', 'ASC'],
+                ['event_time', 'ASC']
+            ]
         })
         .then(results => res.json(results))
         .catch(err => res.status(422).json(err))
