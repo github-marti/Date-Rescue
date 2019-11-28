@@ -57,7 +57,7 @@ module.exports = {
             shortid: shortid.generate(),
             createdAt: new Date(),
             updatedAt: new Date(),
-            UserId: req.body.UserId
+            UserId: req.user.id
         })
         .then(results => res.json(results))
         .catch(err => {

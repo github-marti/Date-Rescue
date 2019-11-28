@@ -50,7 +50,6 @@ function CreateEvent() {
             event_time: state.currentEvent.event_time,
             event_location: state.currentEvent.event_location,
             event_note: state.currentEvent.event_note,
-            UserId: 1
         });
         dispatch({
             type: SET_CURRENT_EVENT,
