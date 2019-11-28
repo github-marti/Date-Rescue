@@ -62,10 +62,13 @@ function CreateEvent() {
             let formData = new FormData();
             formData.append("image", eventImage);
             let imageData = await API.saveImage(eventid, formData);
-            if (imageData.data) {
-                setRedirect(true);
-            }
+            dispatch({
+                type: UPDATE_EVENT,
+                column: "event_date_picture",
+                update: imageData.data
+            })
         }
+        setRedirect(true);
     }
 
     const renderRedirect = () => {

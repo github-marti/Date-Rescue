@@ -70,7 +70,7 @@ module.exports = {
             console.log("req.file detected");
             let filename = req.file.filename;
             db.Event.update({ event_date_picture : `/images/${filename}` }, { where: { id: req.params.id }})
-            .then(results => res.json(results))
+            .then(() => res.send(`/images/${filename}`))
             .catch(err => {
                 console.log(err);
                 res.send(err);
