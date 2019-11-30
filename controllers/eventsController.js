@@ -33,13 +33,15 @@ module.exports = {
         .then(results => {
             console.log('results', results.dataValues);
             // get the createdAt date from the results
-            let createdAt = results.dataValues.createdAt
+            let eventDate = Date.parse(`${results.dataValues.event_date.toISOString().split('T')[0]}T${results.dataValues.event_time}`);
+            console.log('eventDate', eventDate);
 
             // get the current time and set it to UTC time
             let currentDate = Date.now();
+            console.log('currentDate', currentDate);
 
             // compare the createdAt date and current time
-            if (currentDate - createdAt < 43200000) {
+            if (eventDate + 43200000 > currentDate) {
                 res.send(results.dataValues);
             } else {
                 res.send("This page is no longer active!")

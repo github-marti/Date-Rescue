@@ -147,6 +147,30 @@ const StoreProvider = ({ value = [], ...props }) => {
       }
       let minutes = time.split(':')[1];
       return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+    },
+    handleInputChange: event => {
+      let name = event.target.name;
+      let value = event.target.value;
+      dispatch({
+        type: UPDATE_EVENT,
+        column: name,
+        update: value
+      });
+    },
+    handleDateChange: date => {
+      let eventDate = date.toISOString();
+      dispatch({
+        type: UPDATE_EVENT,
+        column: "event_date",
+        update: eventDate
+      });
+    },
+    handleTimeChange: time => {
+      dispatch({
+        type: UPDATE_EVENT,
+        column: "event_time",
+        update: time
+      });
     }
   });
 

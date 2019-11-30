@@ -25,6 +25,7 @@ function AllEvents() {
                     {state.allEvents.map(event => {
                         return <EventCard
                             key={event.shortid}
+                            id={event.id}
                             event_name={event.event_name}
                             event_date={event.event_date}
                             event_time={event.event_time}
