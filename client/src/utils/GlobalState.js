@@ -3,7 +3,8 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   UPDATE_ACTIVE,
-  SET_CURRENT_EVENT,
+  SET_NEW_EVENT,
+  SET_UPCOMING_EVENT,
   SET_ALL_EVENTS,
   UPDATE_EVENT,
   REMOVE_EVENT,
@@ -37,10 +38,17 @@ const reducer = (state, action) => {
         active: action.active
       }
 
-    case SET_CURRENT_EVENT:
+    case SET_NEW_EVENT:
       return {
         ...state,
-        currentEvent: action.newEvent
+        newEvent: action.newEvent
+      }
+
+    case SET_UPCOMING_EVENT:
+      console.log(action);
+      return {
+        ...state,
+        upcomingEvent: action.event
       }
 
     case SET_ALL_EVENTS:
@@ -52,8 +60,8 @@ const reducer = (state, action) => {
     case UPDATE_EVENT:
       return {
         ...state,
-        currentEvent: {
-          ...state.currentEvent,
+        newEvent: {
+          ...state.newEvent,
           [action.column]: action.update
         }
       }
@@ -61,7 +69,7 @@ const reducer = (state, action) => {
     case COMPLETE_EVENT:
       return {
         ...state,
-        currentEvent: {},
+        newEvent: {},
         allEvents: [
           ...state.allEvents,
           action.completedEvent
@@ -106,9 +114,9 @@ const reducer = (state, action) => {
           return location
         })
       }
-      
-      default:
-        return state;
+
+    default:
+      return state;
   }
 };
 
@@ -117,7 +125,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     username: "",
     userid: 0,
     authenticated: false,
-    currentEvent: {},
+    newEvent: {},
     allEvents: [],
     upcomingCall: {},
     upcomingText: {},
@@ -131,7 +139,15 @@ const StoreProvider = ({ value = [], ...props }) => {
       angelShot: "",
       likes: 0,
       dislikes: 0
-    }]
+    }],
+    formatTime: time => {
+      let hour = time.split(':')[0];
+      if (hour.charAt(0) === '0') {
+        hour = hour.substring(1);
+      }
+      let minutes = time.split(':')[1];
+      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+    }
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

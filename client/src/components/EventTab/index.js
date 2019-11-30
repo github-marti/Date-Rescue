@@ -1,16 +1,17 @@
 import React from "react";
+import "./style.css"
 
-function EventTab() {
+function EventTab(props) {
   return (
     <ul className="nav nav-tabs">
       <li className="nav-item">
-    <a className="nav-link active" href="www.google.com">Upcoming Date</a>
-  </li>
-      <li className="nav-item">
-        <a className="nav-link active" href="www.google.com">Create-A-Date</a>
+        <button className="nav-link active" name="upcoming" onClick={props.handleClick}>Upcoming Date</button>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="www.google.com">View a past date</a>
+        <button className="nav-link" name="create" onClick={props.handleClick}>Create-a-Date</button>
+      </li>
+      <li className="nav-item">
+        <button className="nav-link" name="all" onClick={props.handleClick}>View All Dates</button>
       </li>
     </ul>
   );

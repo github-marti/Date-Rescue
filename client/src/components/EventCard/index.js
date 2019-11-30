@@ -1,17 +1,11 @@
 import React from 'react';
 import Moment from 'react-moment';
+import CopyLink from '../CopyLink';
 import { Card, CardBody } from 'reactstrap';
+import { useStoreContext } from '../../utils/GlobalState';
 
 function EventCard(props) {
-
-    const formatTime = time => {
-        let hour = time.split(':')[0];
-        if (hour.charAt(0) === '0') {
-            hour = hour.substring(1);
-        }
-        let minutes = time.split(':')[1];
-        return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
-    };
+    const [state, _] = useStoreContext();
 
     return (
         <>
@@ -23,13 +17,14 @@ function EventCard(props) {
                             <Moment date={props.event_date} format="MMMM Do YYYY" />
                         </p>
                         <p>
-                            {formatTime(props.event_time)}
+                            {state.formatTime(props.event_time)}
                         </p>
                         <p>{props.event_location}</p>
                         <p>{props.event_note}</p>
                         <p><img width="100px" src={props.event_date_picture}></img></p>
                         {Date.parse(`${props.event_date}T${props.event_time}`) > new Date() ? (
                             <div>
+                                <CopyLink shortid={props.shortid}/>
                                 <button>Update Date</button>
                                 <button>Delete Date</button>
                             </div>

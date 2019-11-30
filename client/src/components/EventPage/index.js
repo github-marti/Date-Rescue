@@ -1,5 +1,5 @@
 import React from 'react';
-import API from '../../utils/eventAPI'
+import API from '../../utils/eventAPI';
 
 class EventPage extends React.Component {
     state = {
@@ -10,6 +10,7 @@ class EventPage extends React.Component {
         event_note: "",
         event_date_picture: ""
     }
+    
 
     async componentDidMount() {
         const { shortid } = this.props.match.params;
@@ -25,13 +26,22 @@ class EventPage extends React.Component {
         })
     }
 
+    formatTime = time => {
+        let hour = time.split(':')[0];
+        if (hour.charAt(0) === '0') {
+            hour = hour.substring(1);
+        }
+        let minutes = time.split(':')[1];
+        return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+    };
+
     render() {
         if (this.state.event_name) {
             return (
                 <div>
                     <h1>Public Event Page</h1>
                     <p>Date: {this.state.event_date}</p>
-                    <p>Time: {this.state.event_time}</p>
+                    <p>Time: {this.formatTime(this.state.event_time)}</p>
                     <p>Location: {this.state.event_location}</p>
                     <p>Note: {this.state.event_note}</p>
                     <iframe width="300" height="200" frameborder="0"
