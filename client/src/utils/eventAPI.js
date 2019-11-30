@@ -25,6 +25,7 @@ export default {
     },
     // Updates existing event with given information
     updateEvent: function (eventid, eventData) {
+        console.log('eventData', eventData)
         return axios.put(`/api/events/${eventid}`, eventData);
     },
     // Deletes event by id

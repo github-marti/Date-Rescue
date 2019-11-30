@@ -16,32 +16,6 @@ function CreateEvent() {
         console.log('state', state);
     }, [state.active, show]);
 
-    const handleInputChange = event => {
-        let name = event.target.name;
-        let value = event.target.value;
-        dispatch({
-            type: UPDATE_EVENT,
-            column: name,
-            update: value
-        });
-    };
-
-    const handleDateChange = date => {
-        dispatch({
-            type: UPDATE_EVENT,
-            column: "event_date",
-            update: date
-        });
-    };
-
-    const handleTimeChange = time => {
-        dispatch({
-            type: UPDATE_EVENT,
-            column: "event_time",
-            update: time
-        });
-    };
-
     const handleClose = () => {
         setShow(false);
         dispatch({
@@ -89,15 +63,15 @@ function CreateEvent() {
     return (
         <div className="App">
 
-            <input type="text" name="event_name" required onChange={handleInputChange} />
+            <input type="text" name="event_name" required onChange={state.handleInputChange} />
             <br />
-            <DatePicker value={state.newEvent ? new Date(state.newEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()} />
+            <DatePicker value={state.newEvent && state.newEvent.event_date ? new Date(state.newEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
             <br />
-            <TimePicker onChange={handleTimeChange} disableClock={true} />
+            <TimePicker onChange={state.handleTimeChange} disableClock={true} />
             <br />
-            <Search handleInputChange={handleInputChange} />
+            <Search handleInputChange={state.handleInputChange} />
             <br />
-            <textarea name="event_note" onChange={handleInputChange} />
+            <textarea name="event_note" onChange={state.handleInputChange} />
             <br />
             <input type="file" id="event_image" />
             <br />

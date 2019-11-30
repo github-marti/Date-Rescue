@@ -33,7 +33,7 @@ module.exports = {
         .then(results => {
             console.log('results', results.dataValues);
             // get the createdAt date from the results
-            let eventDate = Date.parse(`${results.dataValues.event_date}T${results.dataValues.event_time}`);
+            let eventDate = Date.parse(`${results.dataValues.event_date.toISOString().split('T')[0]}T${results.dataValues.event_time}`);
             console.log('eventDate', eventDate);
 
             // get the current time and set it to UTC time

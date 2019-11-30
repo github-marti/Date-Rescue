@@ -11,7 +11,7 @@ function UpcomingEvent () {
     useEffect(() => {
         API.getEvents(state.userid)
         .then(results => {
-            let upcomingEvents = results.data.filter(el => Date.parse(`${el.event_date}T${el.event_time}`) > new Date());
+            let upcomingEvents = results.data.filter(el => Date.parse(`${el.event_date.split('T')[0]}T${el.event_time}`) > new Date());
             console.log(upcomingEvents[0])
             dispatch({
                 type: SET_UPCOMING_EVENT,
