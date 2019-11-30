@@ -2,6 +2,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const UPDATE_ACTIVE = 'UPDATE_ACTIVE';
 export const SET_NEW_EVENT = 'SET_NEW_EVENT';
+export const SET_UPCOMING_EVENT = 'SET_UPCOMING_EVENT';
 export const SET_ALL_EVENTS = 'SET_ALL_EVENTS';
 export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const CANCEL_EVENT = 'CANCEL_EVENT';

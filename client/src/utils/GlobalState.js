@@ -4,6 +4,7 @@ import {
   LOGOUT_USER,
   UPDATE_ACTIVE,
   SET_NEW_EVENT,
+  SET_UPCOMING_EVENT,
   SET_ALL_EVENTS,
   UPDATE_EVENT,
   REMOVE_EVENT,
@@ -41,6 +42,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         newEvent: action.newEvent
+      }
+
+    case SET_UPCOMING_EVENT:
+      console.log(action);
+      return {
+        ...state,
+        upcomingEvent: action.event
       }
 
     case SET_ALL_EVENTS:
