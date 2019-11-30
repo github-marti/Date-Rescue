@@ -6,15 +6,14 @@ import FormData from 'form-data';
 import Search from '../Search';
 import { useStoreContext } from '../../utils/GlobalState'
 import API from '../../utils/eventAPI';
-import { SET_CURRENT_EVENT, UPDATE_EVENT } from '../../utils/actions';
+import { SET_CURRENT_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
-    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         console.log('state', state);
-    }, [redirect]);
+    }, [state.active]);
 
     const handleInputChange = event => {
         let name = event.target.name;
@@ -68,22 +67,18 @@ function CreateEvent() {
                 update: imageData.data
             })
         }
-        setRedirect(true);
+        dispatch({
+            type: UPDATE_ACTIVE,
+            active: 'upcoming'
+        })
     }
-
-    const renderRedirect = () => {
-        if (redirect) {
-            return <Redirect to="/event/upcoming" />
-        }
-    };
 
     return (
         <div className="App">
-            {renderRedirect()}
             <form onSubmit={handleFormSubmit}>
                 <input type="text" name="event_name" required onChange={handleInputChange} />
                 <br />
-                <DatePicker value={state.currentEvent.event_date ? new Date(state.currentEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()} />
+                <DatePicker value={state.currentEvent ? new Date(state.currentEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()} />
                 <br />
                 <TimePicker onChange={handleTimeChange} disableClock={true} />
                 <br />

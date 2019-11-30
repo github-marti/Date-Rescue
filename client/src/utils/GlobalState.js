@@ -2,8 +2,9 @@ import React, { createContext, useReducer, useContext } from "react";
 import {
   LOGIN_USER,
   LOGOUT_USER,
+  UPDATE_ACTIVE,
   SET_CURRENT_EVENT,
-  SET_PAST_EVENTS,
+  SET_ALL_EVENTS,
   UPDATE_EVENT,
   REMOVE_EVENT,
   COMPLETE_EVENT,
@@ -30,16 +31,22 @@ const reducer = (state, action) => {
         username: ''
       }
 
+    case UPDATE_ACTIVE:
+      return {
+        ...state,
+        active: action.active
+      }
+
     case SET_CURRENT_EVENT:
       return {
         ...state,
         currentEvent: action.newEvent
       }
 
-    case SET_PAST_EVENTS:
+    case SET_ALL_EVENTS:
       return {
         ...state,
-        pastEvents: action.pastEvents
+        allEvents: action.allEvents
       }
 
     case UPDATE_EVENT:
@@ -55,8 +62,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentEvent: {},
-        pastEvents: [
-          ...state.pastEvents,
+        allEvents: [
+          ...state.allEvents,
           action.completedEvent
         ]
       }
@@ -64,7 +71,7 @@ const reducer = (state, action) => {
     case REMOVE_EVENT:
       return {
         ...state,
-        pastEvents: state.pastEvents.filter(event => {
+        allEvents: state.allEvents.filter(event => {
           return action.id !== event.id
         })
       }
@@ -111,7 +118,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     userid: 0,
     authenticated: false,
     currentEvent: {},
-    pastEvents: [],
+    allEvents: [],
     upcomingCall: {},
     upcomingText: {},
     locations: [{
@@ -124,15 +131,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       angelShot: "",
       likes: 0,
       dislikes: 0
-    }],
-    formatTime: time => {
-      let hour = time.split(':')[0];
-      if (hour.charAt(0) === '0') {
-        hour = hour.substring(1);
-      }
-      let minutes = time.split(':')[1];
-      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
-    }
+    }]
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

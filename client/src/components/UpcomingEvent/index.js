@@ -8,7 +8,7 @@ function UpcomingEvent () {
 
     return (
         <div>
-            {state.currentEvent.id ? ( 
+            {state.currentEvent ? ( 
                 <EventCard 
                 event_name={state.currentEvent.event_name}
                 event_date={state.currentEvent.event_date}
@@ -19,7 +19,7 @@ function UpcomingEvent () {
                 formatTime={state.formatTime}
             />
             ) : (
-                <h3>You don't have any upcoming events.</h3>
+                <p>You don't have any upcoming events.</p>
             )}
         </div>
     )

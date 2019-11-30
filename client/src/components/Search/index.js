@@ -40,7 +40,7 @@ function Search(props) {
         width="300"
         height="300"
         frameborder="0"
-        src={state.currentEvent.event_location ?
+        src={state.currentEvent ?
           `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${state.currentEvent.event_location}`
           : `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=Los+Angeles`}
         allowfullscreen>
