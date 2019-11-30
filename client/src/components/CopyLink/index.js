@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useStoreContext } from '../../utils/GlobalState';
 
-export default function CopyExample(props) {
+export default function CopyLink(props) {
 
     const [state, _] = useStoreContext();
     const [copySuccess, setCopySuccess] = useState('');
@@ -26,7 +26,7 @@ export default function CopyExample(props) {
             <form>
                 <textarea
                     ref={textAreaRef}
-                    value={`localhost:3000/events/${state.newEvent.shortid}`}
+                    value={`localhost:3000/events/${props.shortid}`}
                 />
             </form>
         </div>

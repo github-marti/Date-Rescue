@@ -114,9 +114,9 @@ const reducer = (state, action) => {
           return location
         })
       }
-      
-      default:
-        return state;
+
+    default:
+      return state;
   }
 };
 
@@ -139,7 +139,15 @@ const StoreProvider = ({ value = [], ...props }) => {
       angelShot: "",
       likes: 0,
       dislikes: 0
-    }]
+    }],
+    formatTime: time => {
+      let hour = time.split(':')[0];
+      if (hour.charAt(0) === '0') {
+        hour = hour.substring(1);
+      }
+      let minutes = time.split(':')[1];
+      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+    }
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

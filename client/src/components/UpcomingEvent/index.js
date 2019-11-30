@@ -30,6 +30,7 @@ function UpcomingEvent () {
                 event_location={state.upcomingEvent.event_location}
                 event_note={state.upcomingEvent.event_note}
                 event_date_picture={state.upcomingEvent.event_date_picture}
+                shortid={state.upcomingEvent.shortid}
             />
             ) : (
                 <p>You don't have any upcoming events.</p>

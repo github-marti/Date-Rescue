@@ -31,6 +31,7 @@ function AllEvents() {
                             event_location={event.event_location}
                             event_note={event.event_note}
                             event_date_picture={event.event_date_picture}
+                            shortid={event.shortid}
                         />
                     })}
                 </div>

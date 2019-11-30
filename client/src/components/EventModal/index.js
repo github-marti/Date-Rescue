@@ -1,9 +1,10 @@
 import React from 'react';
 import CopyLink from '../CopyLink';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { useStoreContext } from '../../utils/GlobalState'
 
 function EventModal (props) {
-    console.log(props.show);
+    const [state, _] = useStoreContext();
 
     return (
         <Modal isOpen={props.show} onHide={props.handleClose}>
@@ -13,7 +14,7 @@ function EventModal (props) {
             <ModalBody>
                 <p>Your date has been successfully saved!</p>
                 <p>Here is your unique date page link that you can share with friends.</p>
-                <CopyLink />
+                <CopyLink shortid={state.newEvent.shortid} />
             </ModalBody>
             <ModalFooter>
                 <Button variant="primary" onClick={props.handleClose}>
