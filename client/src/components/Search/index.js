@@ -40,8 +40,8 @@ function Search(props) {
         width="300"
         height="300"
         frameBorder="0"
-        src={state.currentEvent ?
-          `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${state.currentEvent.event_location}`
+        src={state.newEvent ?
+          `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${state.newEvent.event_location}`
           : `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=Los+Angeles`}
         allowFullScreen>
       </iframe>

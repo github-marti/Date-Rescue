@@ -26,7 +26,7 @@ export default function CopyExample(props) {
             <form>
                 <textarea
                     ref={textAreaRef}
-                    value={`localhost:3000/events/${state.currentEvent.shortid}`}
+                    value={`localhost:3000/events/${state.newEvent.shortid}`}
                 />
             </form>
         </div>

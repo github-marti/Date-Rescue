@@ -8,14 +8,14 @@ function UpcomingEvent () {
 
     return (
         <div>
-            {state.currentEvent ? ( 
+            {state.newEvent ? ( 
                 <EventCard 
-                event_name={state.currentEvent.event_name}
-                event_date={state.currentEvent.event_date}
-                event_time={state.currentEvent.event_time}
-                event_location={state.currentEvent.event_location}
-                event_note={state.currentEvent.event_note}
-                event_date_picture={state.currentEvent.event_date_picture}
+                event_name={state.newEvent.event_name}
+                event_date={state.newEvent.event_date}
+                event_time={state.newEvent.event_time}
+                event_location={state.newEvent.event_location}
+                event_note={state.newEvent.event_note}
+                event_date_picture={state.newEvent.event_date_picture}
                 formatTime={state.formatTime}
             />
             ) : (

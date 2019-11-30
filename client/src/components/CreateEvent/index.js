@@ -6,7 +6,7 @@ import Search from '../Search';
 import EventModal from '../EventModal';
 import { useStoreContext } from '../../utils/GlobalState';
 import API from '../../utils/eventAPI';
-import { SET_CURRENT_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
+import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
@@ -53,14 +53,14 @@ function CreateEvent() {
     const handleFormSubmit = async event => {
         event.preventDefault();
         let initialEvent = await API.saveEvent({
-            event_name: state.currentEvent.event_name,
-            event_date: state.currentEvent.event_date,
-            event_time: state.currentEvent.event_time,
-            event_location: state.currentEvent.event_location,
-            event_note: state.currentEvent.event_note,
+            event_name: state.newEvent.event_name,
+            event_date: state.newEvent.event_date,
+            event_time: state.newEvent.event_time,
+            event_location: state.newEvent.event_location,
+            event_note: state.newEvent.event_note,
         });
         dispatch({
-            type: SET_CURRENT_EVENT,
+            type: SET_NEW_EVENT,
             newEvent: initialEvent.data
         });
         let eventImage = document.getElementById('event_image').files[0];
@@ -91,7 +91,7 @@ function CreateEvent() {
 
             <input type="text" name="event_name" required onChange={handleInputChange} />
             <br />
-            <DatePicker value={state.currentEvent ? new Date(state.currentEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()} />
+            <DatePicker value={state.newEvent ? new Date(state.newEvent.event_date) : null} onChange={handleDateChange} minDate={new Date()} />
             <br />
             <TimePicker onChange={handleTimeChange} disableClock={true} />
             <br />

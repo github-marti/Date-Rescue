@@ -3,7 +3,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   UPDATE_ACTIVE,
-  SET_CURRENT_EVENT,
+  SET_NEW_EVENT,
   SET_ALL_EVENTS,
   UPDATE_EVENT,
   REMOVE_EVENT,
@@ -37,10 +37,10 @@ const reducer = (state, action) => {
         active: action.active
       }
 
-    case SET_CURRENT_EVENT:
+    case SET_NEW_EVENT:
       return {
         ...state,
-        currentEvent: action.newEvent
+        newEvent: action.newEvent
       }
 
     case SET_ALL_EVENTS:
@@ -52,8 +52,8 @@ const reducer = (state, action) => {
     case UPDATE_EVENT:
       return {
         ...state,
-        currentEvent: {
-          ...state.currentEvent,
+        newEvent: {
+          ...state.newEvent,
           [action.column]: action.update
         }
       }
@@ -61,7 +61,7 @@ const reducer = (state, action) => {
     case COMPLETE_EVENT:
       return {
         ...state,
-        currentEvent: {},
+        newEvent: {},
         allEvents: [
           ...state.allEvents,
           action.completedEvent
@@ -117,7 +117,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     username: "",
     userid: 0,
     authenticated: false,
-    currentEvent: {},
+    newEvent: {},
     allEvents: [],
     upcomingCall: {},
     upcomingText: {},
