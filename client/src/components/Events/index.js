@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import EventTab from '../EventTab';
 import UpcomingEvent from '../UpcomingEvent';
 import CreateEvent from '../CreateEvent';
