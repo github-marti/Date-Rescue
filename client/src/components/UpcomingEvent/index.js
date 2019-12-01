@@ -24,6 +24,7 @@ function UpcomingEvent () {
         <div>
             {state.upcomingEvent ? ( 
                 <EventCard 
+                id={state.upcomingEvent.id}
                 event_name={state.upcomingEvent.event_name}
                 event_date={state.upcomingEvent.event_date}
                 event_time={state.upcomingEvent.event_time}
