@@ -7,7 +7,7 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 import { useStoreContext } from '../../utils/GlobalState';
 
 function UpdateModal(props) {
-    const [state, dispatch] = useStoreContext();
+    const [state] = useStoreContext();
     const [dropdownOpen, setDropdown] = useState();
 
     const toggle = () => {

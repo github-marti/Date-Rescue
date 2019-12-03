@@ -3,6 +3,7 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   SET_RELOAD,
+  SET_LOCATION,
   UPDATE_ACTIVE,
   SET_NEW_EVENT,
   SET_UPCOMING_EVENT,
@@ -37,6 +38,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         reload: !state.reload
+      }
+
+    case SET_LOCATION:
+      return {
+        ...state,
+        locations: action.locations
       }
 
     case UPDATE_ACTIVE:
@@ -100,9 +107,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_LIKE:
+      console.log("addinglike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        likes: state.locations.map(location => {
           if (location.id === action.id) {
             location.likes += 1
           }
@@ -111,9 +119,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_DISLIKE:
+      console.log("addingdislike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        dislikes: state.locations.map(location => {
           if (location.id === action.id) {
             location.dislikes += 1
           }

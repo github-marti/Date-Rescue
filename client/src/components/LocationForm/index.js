@@ -1,6 +1,7 @@
 import React from 'react';
 import API from '../../utils/locationAPI';
 import FormData from 'form-data';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 function CreateLocation() {
 
@@ -16,9 +17,11 @@ function CreateLocation() {
         console.log(obj)
         API.saveLocation(obj);
     }
+    
 
     return (
         <div className="Location">
+
             <form onSubmit={handleFormSubmit}>
                 <div class="form-row">
                     <div class="form-group col-md-6">
