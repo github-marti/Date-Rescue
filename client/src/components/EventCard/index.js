@@ -41,20 +41,27 @@ function EventCard(props) {
         }
     };
 
-    const handleUpdate = event => {
-        event.preventDefault();
-        let eventData = state.newEvent
-        API.updateEvent(props.id, eventData)
-            .then(results => {
-                console.log(results);
-                dispatch({
-                    type: SET_RELOAD
-                });
-                setUpdateShow(false);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const handleUpdate = async event => {
+        try {
+            event.preventDefault();
+            let eventData = state.newEvent
+            let eventImage = document.getElementById('event_image').files[0];
+            let updatedEvent = await API.updateEvent(props.id, eventData);
+            console.log('eventData', updatedEvent);
+            if (eventImage && updatedEvent.data) {
+                console.log('image detected');
+                let formData = new FormData();
+                formData.append("image", eventImage);
+                let updatedImage = API.saveImage(props.id, formData);
+                API.updateEvent(props.id, { event_date_picture: updatedImage.data })
+            };
+            dispatch({
+                type: SET_RELOAD
+            });
+            setUpdateShow(false);
+        } catch {
+            console.log('update unsuccessful');
+        };     
     };
 
     const handleCancel = event => {
