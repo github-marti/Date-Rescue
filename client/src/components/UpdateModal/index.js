@@ -2,25 +2,11 @@ import React from 'react';
 import DatePicker from 'react-date-picker';
 import TimePicker from 'react-time-picker';
 import Search from '../Search';
-import API from '../../utils/eventAPI';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { useStoreContext } from '../../utils/GlobalState';
 
 function UpdateModal(props) {
     const [state, dispatch] = useStoreContext();
-
-    const handleUpdate = event => {
-        event.preventDefault();
-        console.log('event to be saved', state.newEvent);
-        let eventData = state.newEvent
-        API.updateEvent(props.id, eventData)
-            .then(results => {
-                console.log(results);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
 
     return (
         <Modal isOpen={props.show}>
@@ -45,7 +31,7 @@ function UpdateModal(props) {
                 <Button variant="secondary" name="update" onClick={props.handleClose}>
                     Cancel
                 </Button>
-                <Button variant="primary" name="update" onClick={handleUpdate}>
+                <Button variant="primary" name="update" onClick={props.handleUpdate}>
                     Update
                 </Button>
             </ModalFooter>

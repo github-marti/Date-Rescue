@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useContext } from "react";
 import {
   LOGIN_USER,
   LOGOUT_USER,
+  SET_RELOAD,
   UPDATE_ACTIVE,
   SET_NEW_EVENT,
   SET_UPCOMING_EVENT,
@@ -30,6 +31,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         username: ''
+      }
+
+    case SET_RELOAD:
+      return {
+        ...state,
+        reload: !state.reload
       }
 
     case UPDATE_ACTIVE:
@@ -126,7 +133,9 @@ const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(reducer, {
     username: "",
     userid: 0,
+    reload: false,
     authenticated: false,
+    autocomplete: "",
     newEvent: {},
     allEvents: [],
     upcomingCall: {},

@@ -16,7 +16,7 @@ function AllEvents() {
                     allEvents: results.data
                 })
             })
-    }, []);
+    }, [state.reload]);
 
     return (
         <div>
@@ -32,6 +32,7 @@ function AllEvents() {
                             event_location={event.event_location}
                             event_note={event.event_note}
                             event_date_picture={event.event_date_picture}
+                            active={event.active}
                             shortid={event.shortid}
                         />
                     })}

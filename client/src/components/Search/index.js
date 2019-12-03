@@ -1,9 +1,10 @@
 import React from 'react';
 import Script from 'react-load-script';
+import './style.css';
 import { UPDATE_EVENT } from '../../utils/actions';
 import { useStoreContext } from '../../utils/GlobalState';
 
-function Search(props) {
+function Search() {
 
   const [state, dispatch] = useStoreContext();
 
@@ -34,7 +35,7 @@ function Search(props) {
         url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
         onLoad={handleScriptLoad}
       />
-      <input id="autocomplete" name="event_location" onChange={props.handleInputChange} />
+      <input id="autocomplete" name="event_location" onChange={state.handleInputChange} />
       <br />
       <iframe
         width="300"
