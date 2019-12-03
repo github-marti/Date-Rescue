@@ -52,7 +52,6 @@ const reducer = (state, action) => {
       }
 
     case SET_UPCOMING_EVENT:
-      console.log(action);
       return {
         ...state,
         upcomingEvent: action.event
@@ -160,11 +159,19 @@ const StoreProvider = ({ value = [], ...props }) => {
     handleInputChange: event => {
       let name = event.target.name;
       let value = event.target.value;
-      dispatch({
-        type: UPDATE_EVENT,
-        column: name,
-        update: value
-      });
+      if (name === 'call_type') {
+        dispatch({
+          type: UPDATE_EVENT,
+          column: name,
+          update: event.target.innerText
+        })
+      } else {
+        dispatch({
+          type: UPDATE_EVENT,
+          column: name,
+          update: value
+        });
+      };
     },
     handleDateChange: date => {
       let eventDate = date.toISOString();
@@ -180,6 +187,13 @@ const StoreProvider = ({ value = [], ...props }) => {
         column: "event_time",
         update: time
       });
+    },
+    handleCallTime: time => {
+      dispatch({
+        type: UPDATE_EVENT,
+        column: "call_time",
+        update: time
+      })
     }
   });
 

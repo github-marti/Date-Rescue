@@ -4,6 +4,9 @@ const shortid = require('shortid');
 module.exports = {
     getAll: function (req, res) {
         db.Event.findAll({
+            include: [
+                { model: db.Call }
+            ],
             where: {
                 UserId: req.user.id
             },
@@ -13,7 +16,10 @@ module.exports = {
             ]
         })
         .then(results => res.json(results))
-        .catch(err => res.status(422).json(err))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
     },
     getOne: function (req, res) {
         db.Event.findOne({
