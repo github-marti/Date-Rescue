@@ -69,7 +69,7 @@ function CreateEvent() {
             <br />
             <TimePicker onChange={state.handleTimeChange} disableClock={true} />
             <br />
-            <Search handleInputChange={state.handleInputChange} />
+            <Search />
             <br />
             <textarea name="event_note" onChange={state.handleInputChange} />
             <br />

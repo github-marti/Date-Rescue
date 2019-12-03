@@ -133,6 +133,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     userid: 0,
     reload: false,
     authenticated: false,
+    autocomplete: "",
     newEvent: {},
     allEvents: [],
     upcomingCall: {},
