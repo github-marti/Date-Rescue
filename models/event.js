@@ -49,16 +49,12 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: {
         allowNull: false
       }
-    })
-  }
+    });
 
-  Event.associate = function (models) {
     Event.hasOne(models.Call, {
       onDelete: 'cascade'
     });
-  };
 
-  Event.associate = function (models) {
     Event.hasOne(models.Text, {
       onDelete: 'cascade'
     });
