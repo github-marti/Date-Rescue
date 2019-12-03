@@ -1,5 +1,6 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const SET_RELOAD = 'SET_RELOAD';
 export const UPDATE_ACTIVE = 'UPDATE_ACTIVE';
 export const SET_NEW_EVENT = 'SET_NEW_EVENT';
 export const SET_UPCOMING_EVENT = 'SET_UPCOMING_EVENT';

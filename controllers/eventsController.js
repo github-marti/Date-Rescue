@@ -31,17 +31,14 @@ module.exports = {
             }
         })
         .then(results => {
-            console.log('results', results.dataValues);
             // get the createdAt date from the results
             let eventDate = Date.parse(`${results.dataValues.event_date.toISOString().split('T')[0]}T${results.dataValues.event_time}`);
-            console.log('eventDate', eventDate);
 
             // get the current time and set it to UTC time
             let currentDate = Date.now();
-            console.log('currentDate', currentDate);
 
             // compare the createdAt date and current time
-            if (eventDate + 43200000 > currentDate) {
+            if (results.dataValues.active && eventDate + 43200000 > currentDate) {
                 res.send(results.dataValues);
             } else {
                 res.send("This page is no longer active!")
@@ -87,6 +84,14 @@ module.exports = {
     },
     update: function (req, res) {
         db.Event.update(req.body, {where: {id: req.params.id}})
+        .then(results => res.json(results))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
+    },
+    cancel: function (req, res) {
+        db.Event.update({ shortid: shortid.generate(), active: false }, {where: {id: req.params.id}})
         .then(results => res.json(results))
         .catch(err => {
             console.log(err);

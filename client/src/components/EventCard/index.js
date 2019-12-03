@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Moment from 'react-moment';
 import CopyLink from '../CopyLink';
 import UpdateModal from '../UpdateModal';
+import CancelModal from '../CancelModal';
 import { Card, CardBody } from 'reactstrap';
 import { useStoreContext } from '../../utils/GlobalState';
-import { SET_NEW_EVENT } from '../../utils/actions';
+import { SET_NEW_EVENT, SET_RELOAD } from '../../utils/actions';
+import API from '../../utils/eventAPI';
 
 function EventCard(props) {
     const [state, dispatch] = useStoreContext();
@@ -39,11 +41,43 @@ function EventCard(props) {
         }
     };
 
+    const handleUpdate = event => {
+        event.preventDefault();
+        let eventData = state.newEvent
+        API.updateEvent(props.id, eventData)
+            .then(results => {
+                console.log(results);
+                dispatch({
+                    type: SET_RELOAD
+                });
+                setUpdateShow(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
+
+    const handleCancel = event => {
+        event.preventDefault();
+        API.cancelEvent(props.id)
+            .then(results => {
+                console.log(results);
+                setCancelShow(false);
+                dispatch({
+                    type: SET_RELOAD
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    };
+
     return (
         <>
             {props.event_name ? (
                 <Card>
                     <CardBody>
+                        {!props.active ? (<h4>CANCELED</h4>) : (<></>)}
                         <h4>{props.event_name}</h4>
                         <p>
                             <Moment date={props.event_date} format="MMMM Do YYYY" />
@@ -54,23 +88,28 @@ function EventCard(props) {
                         <p>{props.event_location}</p>
                         <p>{props.event_note}</p>
                         <p><img width="100px" src={props.event_date_picture}></img></p>
-                        {Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) > new Date() ? (
+                        {Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) > new Date() && props.active ? (
                             <div>
-                                <CopyLink shortid={props.shortid}/>
+                                <CopyLink shortid={props.shortid} />
                                 <button name="update" onClick={handleShow}>Update Date</button>
                                 <button name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}
-                    <UpdateModal 
-                        show={updateShow} 
-                        id={props.id}
-                        event_name={props.event_name}
-                        event_date={props.event_date}
-                        event_time={props.event_time}
-                        event_location={props.event_location}
-                        event_note={props.event_note}
-                        handleClose={handleClose}
-                    />
+                        <UpdateModal
+                            show={updateShow}
+                            event_name={props.event_name}
+                            event_date={props.event_date}
+                            event_time={props.event_time}
+                            event_location={props.event_location}
+                            event_note={props.event_note}
+                            handleClose={handleClose}
+                            handleUpdate={handleUpdate}
+                        />
+                        <CancelModal
+                            show={cancelShow}
+                            handleClose={handleClose}
+                            handleCancel={handleCancel}
+                        />
                     </CardBody>
                 </Card>
             ) : (<p>You don't have any events yet.</p>)

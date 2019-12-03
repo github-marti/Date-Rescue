@@ -20,5 +20,6 @@ module.exports = function (app) {
     app.post("/api/events", eventsController.create);
     app.post("/api/events/:id/images/upload", upload.single('image'), eventsController.uploadImage);
     app.put("/api/events/:id", eventsController.update);
+    app.put("/api/events/cancel/:id", eventsController.cancel);
     app.delete("/api/events/:id", eventsController.delete);
 }
