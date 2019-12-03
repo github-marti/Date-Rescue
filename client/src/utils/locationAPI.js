@@ -18,7 +18,7 @@ export default {
         return axios.put(`/api/locations/:${locationid}?${likeData}=`);
     },
     // Updates dislike with given information
-    updateLike: function (locationid, disLikeData) {
+    updateDisLike: function (locationid, disLikeData) {
         return axios.put(`/api/locations/:${locationid}?${disLikeData}=`);
     }
 };

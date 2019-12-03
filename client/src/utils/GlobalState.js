@@ -94,9 +94,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_LIKE:
+      console.log("addinglike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        likes: state.locations.map(location => {
           if (location.id === action.id) {
             location.likes += 1
           }
@@ -105,9 +106,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_DISLIKE:
+      console.log("addingdislike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        dislikes: state.locations.map(location => {
           if (location.id === action.id) {
             location.dislikes += 1
           }
