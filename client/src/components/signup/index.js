@@ -28,6 +28,7 @@ function SignUp() {
     if (!user.email || !user.username || !user.password || !user.phoneNumber) {
       return;
     }
+    console.log('user', user);
     axios.post('/api/signup', userData)
       .then(() => {
         console.log('signup successful!');
@@ -93,7 +94,6 @@ function SignUp() {
                     />
                   </FormGroup>
                 </Col>
-                <h6>Already a member <a href="/"><i className="click" color="light">Click Here</i></a></h6>
                 <Button type="submit" className="btn" color="success">Join Today</Button>
               </Form></Col>
           </row>

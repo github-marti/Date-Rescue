@@ -81,6 +81,7 @@ const Login = function () {
                     />
                   </FormGroup>
                 </Col>
+                <h6>Already a member <a href="/"><i className="click" color="light">Click Here</i></a></h6>
                 <Button className="btn1" color="success">Submit</Button>
               </Form>
             </Col>

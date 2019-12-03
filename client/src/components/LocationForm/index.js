@@ -18,7 +18,7 @@ function CreateLocation() {
     }
 
     return (
-        <div className="Location">
+        <div className="Location" style={{backgroundColor:"beige", fontSize:"20px"}}>
             <form onSubmit={handleFormSubmit}>
                 <div class="form-row">
                     <div class="form-group col-md-6">
