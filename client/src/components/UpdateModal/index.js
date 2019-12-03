@@ -6,7 +6,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { useStoreContext } from '../../utils/GlobalState';
 
 function UpdateModal(props) {
-    const [state, dispatch] = useStoreContext();
+    const [state] = useStoreContext();
 
     return (
         <Modal isOpen={props.show}>
