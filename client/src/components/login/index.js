@@ -46,7 +46,7 @@ const Login = function () {
 
   const renderRedirect = () => {
     if (redirect) {
-      return <Redirect to='/event/create' />
+      return <Redirect to='/home' />
     }
   }
 
