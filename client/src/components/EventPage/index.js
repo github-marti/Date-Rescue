@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 import API from '../../utils/eventAPI';
 
 class EventPage extends React.Component {
@@ -39,13 +40,13 @@ class EventPage extends React.Component {
         if (this.state.event_name) {
             return (
                 <div>
-                    <h1>Public Event Page</h1>
-                    <p>Date: {this.state.event_date}</p>
+                    <h4>Public Event Page</h4>
+                    <p>Date: <Moment date={this.state.event_date} format="MMMM Do YYYY" /></p>
                     <p>Time: {this.formatTime(this.state.event_time)}</p>
                     <p>Location: {this.state.event_location}</p>
                     <p>Note: {this.state.event_note}</p>
-                    <iframe width="300" height="200" frameborder="0"
-                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowfullscreen></iframe>
+                    <iframe width="300" height="200" frameBorder="0"
+                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowFullScreen></iframe>
                     <p><img width="200" src={this.state.event_date_picture}></img></p>
                 </div>
             )
