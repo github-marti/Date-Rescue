@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import FormData from 'form-data';
 import Search from '../Search';
 import EventModal from '../EventModal';
@@ -11,6 +12,7 @@ import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions'
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
     const [show, setShow] = useState(false);
+    const [dropdownOpen, setDropdown] = useState(false);
 
     useEffect(() => {
         console.log('state', state);
@@ -23,6 +25,10 @@ function CreateEvent() {
             active: 'upcoming'
         })
     }
+
+    const toggle = () => {
+        setDropdown(!dropdownOpen);
+    };
 
     const handleFormSubmit = async event => {
         event.preventDefault();
@@ -39,7 +45,13 @@ function CreateEvent() {
         });
         let eventImage = document.getElementById('event_image').files[0];
         let eventid = initialEvent.data.id
-
+        // proceed to save call if user selected to receive a call
+        if (state.newEvent.call_time) {
+            API.saveCall(eventid, {
+                call_time: state.newEvent.call_time,
+                call_type: state.newEvent.call_type
+            })
+        };
         // proceed to save image and update event with image link if image is detected AND initial event data was saved
         if (eventImage && initialEvent.data) {
             let formData = new FormData();
@@ -72,6 +84,19 @@ function CreateEvent() {
             <Search />
             <br />
             <textarea name="event_note" onChange={state.handleInputChange} />
+            <br />
+            <TimePicker onChange={state.handleCallTime} disableClock={true} />
+            <br />
+            <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle caret>
+                    {state.newEvent ? state.newEvent.call_type : "Call Type"}
+                </DropdownToggle>
+                <DropdownMenu>
+                    <DropdownItem name="call_type" onClick={state.handleInputChange}>Best Friend Breakup</DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem name="call_type" onClick={state.handleInputChange}>Family Emergency</DropdownItem>
+                </DropdownMenu>
+            </ButtonDropdown>
             <br />
             <input type="file" id="event_image" />
             <br />

@@ -23,6 +23,12 @@ export default {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
     },
+    saveCall: function (eventid, callData) {
+        return axios.post(`/api/dates/${eventid}/calls`, callData);
+    },
+    updateCall: function (eventid, callid, callData) {
+        return axios.put(`/api/dates/${eventid}/call/${callid}`, callData)
+    },
     // Updates existing event with given information
     updateEvent: function (eventid, eventData) {
         return axios.put(`/api/events/${eventid}`, eventData);
