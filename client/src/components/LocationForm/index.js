@@ -1,6 +1,7 @@
 import React from 'react';
 import API from '../../utils/locationAPI';
 import FormData from 'form-data';
+import "./style.css";
 
 function CreateLocation(props) {
 
@@ -23,7 +24,7 @@ function CreateLocation(props) {
         <div className="Location">
 
             <form onSubmit={handleFormSubmit}>
-                <div class="form-row">
+                <div class="form-row" style={{}}>
                     <div class="form-group col-md-6">
                         <label htmlFor="location_name">Name</label>
                         <input type="text" name="location_name" class="form-control" id="location_name" required />

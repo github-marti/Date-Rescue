@@ -81,10 +81,25 @@ const Login = function () {
                     />
                   </FormGroup>
                 </Col>
+                <h6>Not a member <a href="/signup"><i className="click" color="light">Click Here</i></a></h6>
                 <Button className="btn1" color="success">Submit</Button>
               </Form>
             </Col>
           </row>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
         </Container>
       </div>
     </div>
