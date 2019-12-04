@@ -31,6 +31,7 @@ function CreateEvent() {
     };
 
     const handleFormSubmit = async event => {
+        console.log("EVENT DATE ON SUBMIT", state.newEvent.event_date);
         event.preventDefault();
         let initialEvent = await API.saveEvent({
             event_name: state.newEvent.event_name,

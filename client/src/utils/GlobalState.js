@@ -15,6 +15,7 @@ import {
   ADD_LIKE,
   ADD_DISLIKE
 } from './actions';
+import moment from 'moment';
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -183,7 +184,8 @@ const StoreProvider = ({ value = [], ...props }) => {
       };
     },
     handleDateChange: date => {
-      let eventDate = date.toISOString();
+      let eventDate = moment.utc(date).local().format();
+      console.log("EVENT DATE", eventDate);
       dispatch({
         type: UPDATE_EVENT,
         column: "event_date",
