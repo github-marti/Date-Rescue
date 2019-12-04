@@ -35,7 +35,8 @@ const Login = function () {
         dispatch({
           type: LOGIN_USER,
           username: res.data.username,
-          userid: res.data.id
+          userid: res.data.id,
+          phoneNumber: res.data.phoneNumber
         })
         setRedirect(true);
       })
