@@ -22,7 +22,7 @@ function UpcomingEvent() {
     }, [state.reload]);
 
     const makeCall = () => {
-        axios.post('/calls/outgoing/14809938664');
+        axios.post('/api/calls/outgoing/14809938664');
     }
 
     return (

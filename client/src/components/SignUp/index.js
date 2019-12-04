@@ -28,6 +28,7 @@ function SignUp() {
     if (!user.email || !user.username || !user.password || !user.phoneNumber) {
       return;
     }
+    console.log('user', user);
     axios.post('/api/signup', userData)
       .then(() => {
         console.log('signup successful!');
@@ -45,10 +46,13 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="signUp">
       {renderRedirect()}
-      <body className="bcg">
-        <Container className="signUp">
+        <br></br>
+        <span class="logo">
+                            <img src={require("./redblock2.png")} height="150" width="200" />
+                        </span>
+        <Container className="sign">
           <row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <Form className="form" onSubmit={handleFormSubmit}>
@@ -93,13 +97,17 @@ function SignUp() {
                     />
                   </FormGroup>
                 </Col>
-                <h6>Already a member <a href="/"><i className="click" color="light">Click Here</i></a></h6>
                 <Button type="submit" className="btn" color="success">Join Today</Button>
               </Form></Col>
           </row>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
         </Container>
-      </body>
-    </div>
+      </div>
   );
 };
 

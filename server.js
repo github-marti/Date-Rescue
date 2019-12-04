@@ -3,9 +3,8 @@ require('dotenv').config();
 const session = require("express-session");
 const passport = require("./config/passport");
 const bodyParser = require("body-parser");
-const accountSid = 'AC7a88ff772388157d0ffe6319140b678b';
-const authToken = process.env.TWILIO_KEY;
-const client = require('twilio')(accountSid, authToken);
+const compareCalls = require('./config/middleware/compareCalls');
+const { getUpcoming } = require("./config/calls");
 
 // Sets up the Express App
 // =============================================================
@@ -28,6 +27,9 @@ app.use(bodyParser());
 // Static directory
 app.use(express.static("public"));
 
+// Check for new calls and compare them with current loaded upcoming call
+app.use(compareCalls());
+
 // Routes
 // =============================================================
 require("./routes/call-api-routes")(app);
@@ -44,3 +46,4 @@ db.sequelize.sync({ force: false }).then(function () {
   });
 });
 
+getUpcoming();

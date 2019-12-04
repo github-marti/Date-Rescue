@@ -6,6 +6,7 @@ import LocationCard from "./../LocationCard";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 function ViewCard() {
+
     const [state, dispatch] = useStoreContext()
     const [likebtn, setLikebtn] = useState(false)
     const [show, setShow] = useState(false);

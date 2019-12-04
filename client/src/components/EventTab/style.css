@@ -2,3 +2,9 @@
     font-size: .8em;
     padding: 10px !important;
 }
+
+.nav-item {
+    
+    border-color: black;
+    margin:auto;
+}
