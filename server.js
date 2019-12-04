@@ -27,7 +27,7 @@ app.use(passport.session());
 app.use(bodyParser());
 
 // Check for new calls and compare them with current loaded upcoming call
-// app.use(callMiddleware());
+app.use(callMiddleware());
 
 // Static directory
 app.use(express.static("public"));
@@ -47,5 +47,7 @@ db.sequelize.sync({ force: false }).then(function () {
     console.log("App listening on PORT " + PORT);
   });
 });
+
+
 
 

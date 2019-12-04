@@ -1,6 +1,8 @@
+const db = require("./models");
+
 module.exports = function () {
     return function (req, res, next) {
-        if (req.body) {
+        if (req.body && req.body.call_time) {
             db.Call.findOne({
                 include: [
                     { model: db.Event }
@@ -14,7 +16,9 @@ module.exports = function () {
                     let newCall = Date.parse(new Date(`${req.body.event_date}T${req.body.call_time}:00.000`));
                     console.log('UPCOMING CALL', upcomingCall);
                     console.log('NEW CALL', newCall);
+                    next();
                 });
         };
+    next();
     };
 };
