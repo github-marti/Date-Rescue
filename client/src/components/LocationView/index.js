@@ -4,7 +4,7 @@ import API from '../../utils/locationAPI';
 import LocationForm from "./../LocationForm"
 import LocationCard from "./../LocationCard"
 
-function viewCard() {
+function ViewCard() {
     const [ state, dispatch] = useStoreContext()
     const [likebtn, setLikebtn] = useState(false)
 
@@ -33,4 +33,4 @@ function viewCard() {
         
     )
 }
-export default viewCard;
+export default ViewCard;
