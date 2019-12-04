@@ -27,7 +27,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         username: action.username,
-        userid: action.userid
+        userid: action.userid,
+        phoneNumber: action.phoneNumber
       }
 
     case LOGOUT_USER:

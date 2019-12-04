@@ -4,6 +4,7 @@ import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const HomePage = function() {
     return (
+      <>
         <FormGroup>
         <Label for="exampleDate">Date</Label>
         <Input
@@ -22,6 +23,7 @@ const HomePage = function() {
           placeholder="time placeholder"
         />
       </FormGroup>
+      </>
     );
 }
     
