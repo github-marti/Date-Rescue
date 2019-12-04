@@ -12,6 +12,10 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
 
     },
+    shortid: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   });
 
   Call.associate = function (models) {
