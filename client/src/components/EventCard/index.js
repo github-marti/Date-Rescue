@@ -7,6 +7,7 @@ import { Card, CardBody } from 'reactstrap';
 import { useStoreContext } from '../../utils/GlobalState';
 import { SET_NEW_EVENT, SET_RELOAD } from '../../utils/actions';
 import API from '../../utils/eventAPI';
+import './style.css';
 
 function EventCard(props) {
     const [state, dispatch] = useStoreContext();
@@ -97,8 +98,8 @@ function EventCard(props) {
             {props.event_name ? (
                 <Card>
                     <CardBody>
-                        {!props.active ? (<h4>CANCELED</h4>) : (<></>)}
-                        <h4>{props.event_name}</h4>
+                        {!props.active ? (<h4 className="canceled">CANCELED</h4>) : (<></>)}
+                        <h4 className="font-weight-bold">{props.event_name}</h4>
                         <p>
                             <Moment date={props.event_date} format="MMMM Do YYYY" />
                         </p>
@@ -106,20 +107,22 @@ function EventCard(props) {
                             {state.formatTime(props.event_time)}
                         </p>
                         <p>{props.event_location}</p>
-                        <p>{props.event_note}</p>
+                        <iframe width="300" height="100" frameBorder="0"
+                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
+                        <p><span className="font-weight-bold">Notes: </span>{props.event_note}</p>
                         {props.call_time ?
-                            (<div>
-                                <p>You have a call scheduled:</p>
+                            (<div className="call-container">
+                                <p className="font-weight-bold">Scheduled Call</p>
                                 <p>Call time: {state.formatTime(props.call_time)}</p>
                                 <p>Call type: {props.call_type}</p>
                             </div>) :
                             <p>You don't have a call scheduled.</p>}
                         <p><img width="100px" src={props.event_date_picture}></img></p>
-                        {Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) > new Date() && props.active ? (
+                        {(Date.parse(`${props.event_date}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
                             <div>
                                 <CopyLink shortid={props.shortid} />
-                                <button name="update" onClick={handleShow}>Update Date</button>
-                                <button name="cancel" onClick={handleShow}>Cancel Date</button>
+                                <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>
+                                <button className="btn btn-secondary" name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}
                         <UpdateModal

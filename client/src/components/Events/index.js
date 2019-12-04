@@ -18,7 +18,7 @@ function Events() {
     }
 
     return (
-        <div>
+        <div className="events-container">
             <EventTab handleClick={handleClick} />
             <div className="events-container">
                 {state.eventActive === 'upcoming' ? (
