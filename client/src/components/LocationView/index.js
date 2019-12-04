@@ -5,7 +5,7 @@ import LocationForm from "./../LocationForm";
 import LocationCard from "./../LocationCard";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
-function viewCard() {
+function ViewCard() {
     const [state, dispatch] = useStoreContext()
     const [likebtn, setLikebtn] = useState(false)
     const [show, setShow] = useState(false);
@@ -17,6 +17,24 @@ function viewCard() {
         setLikebtn(!likebtn)
     }
 
+    function saveLocation(obj){
+        setShow(false)
+        API.saveLocation(obj)
+    }
+
+    // function handleSearchChange(event) {
+    //     console.log(event.target.value);
+    //     const filter = event.target.value;
+    //     const filteredList = users.users.filter(item => {
+    //       // merge data together, then see if user input is anywhere inside
+    //       let values = Object.values(item)
+    //         .join("")
+    //         .toLowerCase();
+    //       return values.indexOf(filter.toLowerCase()) !== -1;
+    //     });
+    //     setUsers({ ...users, filteredUsers: filteredList });
+    //   }
+
     useEffect(() => {
         API.getAllLocations().then(data => {
             dispatch({
@@ -25,7 +43,7 @@ function viewCard() {
             })
             console.log(data.data)
         })
-    }, [likebtn])
+    }, [likebtn, show])
     return (
         <div>
             <nav class="navbar navbar-light bg-light">
@@ -39,18 +57,14 @@ function viewCard() {
             {state.locations ? state.locations.map((location, i) => {
                 return <LocationCard click={btnClick} data={location} i={i}></LocationCard>
             }) : ""}
-
-            <Modal show={show} onHide={handleClose}>
+            <Modal isOpen={show} onHide={handleClose}>
                 <ModalHeader closeButton>
                 </ModalHeader>
-                <ModalBody><LocationForm /></ModalBody>
+                <ModalBody><LocationForm handleClose={handleClose}/></ModalBody>
                 <ModalFooter>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
-          </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save
-          </Button>
+                    </Button>
                 </ModalFooter>
             </Modal>
 
@@ -59,4 +73,4 @@ function viewCard() {
 
     )
 }
-export default viewCard;
+export default ViewCard;
