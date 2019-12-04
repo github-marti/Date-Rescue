@@ -27,7 +27,7 @@ const getUpcoming = () => {
         .then(results => {
             if (results) {
                 console.log('RESULTS', results.call_time);
-                let upcomingCall = `${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`;
+                let upcomingCall = Date.parse(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`);
                 let callid = results.id;
                 let phoneNumber = results.Event.User.phoneNumber;
                 startTimer(upcomingCall, callid, phoneNumber);
@@ -42,7 +42,7 @@ const getUpcoming = () => {
 
 const startTimer = (upcomingCall, callid, phoneNumber) => {
     console.log("STARTING TIMER!!!\n\n")
-    let nextCall = Date.parse(upcomingCall);
+    let nextCall = upcomingCall;
     let currentTime = Date.parse(new Date());
     let delta = nextCall - currentTime;
     console.log("DELTA", delta);
@@ -57,7 +57,7 @@ const startTimer = (upcomingCall, callid, phoneNumber) => {
             .catch(err => console.log(err));
         db.Call.destroy({
             where: {
-                id: callid
+                shortid: callid
             }
         });
         getUpcoming();
@@ -68,6 +68,7 @@ const updateTimer = (newCall, callid, phoneNumber) => {
     console.log('TIMER TO BE UPDATED', callTimeout);
     clearTimeout(callTimeout);
     console.log('TIMER CLEARED');
+    console.log("NEW CALL", newCall);
     startTimer(newCall, callid, phoneNumber);
     console.log('NEW TIMER STARTED FOR', phoneNumber);
 };

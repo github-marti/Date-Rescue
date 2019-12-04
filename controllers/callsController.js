@@ -34,6 +34,7 @@ module.exports = {
         db.Call.create({
             call_time: req.body.call_time,
             call_type: req.body.call_type,
+            shortid: req.shortid,
             EventId: req.params.eventid
         })
             .then(results => res.json(results))
@@ -43,8 +44,12 @@ module.exports = {
             })
     },
     update: function (req, res) {
-        console.log('PAY ATTENTION', req.body);
-        db.Call.update(req.body, { where: { id: req.params.callid, EventId: req.params.eventid } })
+        db.Call.update({
+            call_time: req.body.call_time,
+            call_type: req.body.call_type,
+            shortid: req.shortid
+        },
+            { where: { id: req.params.callid, EventId: req.params.eventid } })
             .then(results => res.json(results))
             .catch(err => {
                 console.log(err);
@@ -52,7 +57,7 @@ module.exports = {
             })
     },
     delete: function (req, res) {
-        db.Call.destroy({ where: { id: req.params.id } })
+        db.Call.destroy({ where: { id: req.params.callid, EventId: req.params.eventid } })
             .then(results => res.json(results))
             .catch(err => {
                 console.log(err);

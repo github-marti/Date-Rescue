@@ -29,6 +29,9 @@ export default {
     updateCall: function (eventid, callid, callData) {
         return axios.put(`/api/dates/${eventid}/call/${callid}`, callData)
     },
+    cancelCall: function (eventid, callid) {
+        return axios.delete(`/api/dates/${eventid}/call/${callid}`)
+    },
     // Updates existing event with given information
     updateEvent: function (eventid, eventData) {
         return axios.put(`/api/events/${eventid}`, eventData);

@@ -1,12 +1,7 @@
 import React from 'react';
-import DatePicker from 'react-date-picker';
-import TimePicker from 'react-time-picker';
-import Search from '../Search';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
-import { useStoreContext } from '../../utils/GlobalState';
 
 function CancelModal(props) {
-    const [state, dispatch] = useStoreContext();
 
     return (
         <Modal isOpen={props.show}>

@@ -82,15 +82,34 @@ function EventCard(props) {
     const handleCancel = event => {
         event.preventDefault();
         API.cancelEvent(props.id)
-            .then(results => {
-                setCancelShow(false);
-                dispatch({
-                    type: SET_RELOAD
-                });
+            .then(() => {
+                API.cancelCall(props.id, props.callid)
+                    .then(() => {
+                        setCancelShow(false);
+                        dispatch({
+                            type: SET_RELOAD
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             })
             .catch(err => {
                 console.log(err);
+            });
+    };
+
+    const cancelCall = () => {
+        API.cancelCall(props.id, props.callid)
+            .then(() => {
+                setCancelShow(false);
+                dispatch({
+                    type: SET_RELOAD
+                })
             })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
     return (
@@ -108,7 +127,7 @@ function EventCard(props) {
                         </p>
                         <p>{props.event_location}</p>
                         <iframe width="300" height="100" frameBorder="0"
-                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
+                            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
                         <p><span className="font-weight-bold">Notes: </span>{props.event_note}</p>
                         {props.call_time ?
                             (<div className="call-container">
@@ -122,6 +141,7 @@ function EventCard(props) {
                             <div>
                                 <CopyLink shortid={props.shortid} />
                                 <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>
+                                <button className="btn btn-secondary" onClick={cancelCall}>Cancel Call</button>
                                 <button className="btn btn-secondary" name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}

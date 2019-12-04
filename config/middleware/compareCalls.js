@@ -1,10 +1,12 @@
 const db = require("../../models");
 const { updateTimer } = require("../calls");
+const shortid = require("shortid");
 
 module.exports = function () {
     return function (req, res, next) {
         if (req.body && req.body.call_time) {
-            console.log('SAVING A TIME');
+            let newShortid = shortid.generate();
+            req.shortid = newShortid;
             db.Call.findOne({
                 include: [
                     {
@@ -27,8 +29,8 @@ module.exports = function () {
                     let newCall = Date.parse(new Date(`${req.body.event_date}T${req.body.call_time}:00.000`));
                     console.log('upcomingCall', upcomingCall);
                     console.log('newCall', newCall);
-                    let callid = results.id;
-                    let phoneNumber = results.Event.User.phoneNumber;
+                    let callid = newShortid;
+                    let phoneNumber = req.body.phoneNumber;
                     if (newCall < upcomingCall) {
                         console.log('need to update timer!');
                         updateTimer(newCall, callid, phoneNumber);
