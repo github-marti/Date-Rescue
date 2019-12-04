@@ -1,15 +1,15 @@
-.bcg, html {
-    background-image:url(club photo 2.jpeg);
-    
+.signUp{
+    background-image:url(couple-on-date.jpg);
+    background-size: cover;
+    height:100%;
+    background-repeat: no-repeat;
 }
 
 .form {
-    background-color:gray;
+    padding: 15px;
+    background-color:#b7ada4;
 }
 
-h6 {
-    text-align: center;
-}
 
 .btn {
     margin: 15px

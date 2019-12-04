@@ -46,10 +46,13 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="signUp">
       {renderRedirect()}
-      <body className="bcg">
-        <Container className="signUp">
+        <br></br>
+        <span class="logo">
+                            <img src={require("./redblock2.png")} height="150" width="200" />
+                        </span>
+        <Container className="sign">
           <row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <Form className="form" onSubmit={handleFormSubmit}>
@@ -97,9 +100,14 @@ function SignUp() {
                 <Button type="submit" className="btn" color="success">Join Today</Button>
               </Form></Col>
           </row>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
         </Container>
-      </body>
-    </div>
+      </div>
   );
 };
 

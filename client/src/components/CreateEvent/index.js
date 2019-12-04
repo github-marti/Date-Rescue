@@ -7,6 +7,7 @@ import EventModal from '../EventModal';
 import { useStoreContext } from '../../utils/GlobalState';
 import API from '../../utils/eventAPI';
 import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
+import "./style.css";
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
@@ -61,7 +62,7 @@ function CreateEvent() {
     };
 
     return (
-        <div className="App">
+        <container className="App">
 
             <input type="text" name="event_name" required onChange={state.handleInputChange} />
             <br />
@@ -78,7 +79,7 @@ function CreateEvent() {
             <button onClick={handleFormSubmit}>Submit</button>
             <EventModal show={show} handleClose={handleClose} />
 
-        </div>
+        </container>
     );
 }
 
