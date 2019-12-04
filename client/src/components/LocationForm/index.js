@@ -1,7 +1,6 @@
 import React from 'react';
 import API from '../../utils/locationAPI';
 import FormData from 'form-data';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
 function CreateLocation() {
 
