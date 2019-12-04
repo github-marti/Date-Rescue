@@ -3,6 +3,9 @@ require('dotenv').config();
 const session = require("express-session");
 const passport = require("./config/passport");
 const bodyParser = require("body-parser");
+const accountSid = 'AC7a88ff772388157d0ffe6319140b678b';
+const authToken = process.env.TWILIO_KEY;
+const client = require('twilio')(accountSid, authToken);
 
 // Sets up the Express App
 // =============================================================
@@ -45,7 +48,7 @@ db.sequelize.sync({ force: false }).then(function () {
 function getNextCall() {
   db.Call.findOne({
     include: [
-      { model: db.Event}
+      { model: db.Event }
     ],
     order: [
       ['call_time', 'ASC']
@@ -65,6 +68,14 @@ function makeCall(upcomingCall, callid) {
   console.log('DELTA', delta);
   console.log('NEXT CALL', nextCall, 'CURRENT TIME', currentTime)
   setTimeout(() => {
+    client.calls
+      .create({
+        url: 'http://demo.twilio.com/docs/voice.xml',
+        to: '+14809938664',
+        from: '+19088420029'
+      })
+      .then(call => console.log(call.sid))
+      .catch(err => console.log(err));
     db.Call.destroy({
       where: {
         id: callid
@@ -75,5 +86,4 @@ function makeCall(upcomingCall, callid) {
 };
 
 getNextCall();
-
 

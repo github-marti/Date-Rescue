@@ -30,14 +30,14 @@ function Search() {
   };
 
   return (
-    <div>
+    <div className="search-container">
       <Script
         url={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
         onLoad={handleScriptLoad}
       />
-      <input id="autocomplete" name="event_location" onChange={state.handleInputChange} />
-      <br />
+      <input className="form-control" id="autocomplete" name="event_location" onChange={state.handleInputChange} />
       <iframe
+        className="map-container"
         width="300"
         height="300"
         frameBorder="0"

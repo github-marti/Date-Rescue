@@ -34,7 +34,7 @@ function AllEvents() {
                             event_date_picture={event.event_date_picture}
                             call_time={event.Call ? event.Call.call_time : null}
                             call_type={event.Call ? event.Call.call_type : null}
-                            callid={state.upcomingEvent.Call.id}
+                            callid={event.Call ? event.Call.id : null}
                             active={event.active}
                             shortid={event.shortid}
                         />
