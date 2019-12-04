@@ -3,6 +3,9 @@ require('dotenv').config();
 const session = require("express-session");
 const passport = require("./config/passport");
 const bodyParser = require("body-parser");
+const accountSid = 'AC7a88ff772388157d0ffe6319140b678b';
+const authToken = process.env.TWILIO_KEY;
+const client = require('twilio')(accountSid, authToken);
 
 // Sets up the Express App
 // =============================================================
@@ -35,8 +38,9 @@ require("./routes/user-api-routes")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync({ force: false }).then(function () {
+  app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });
+

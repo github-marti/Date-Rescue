@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import FormData from 'form-data';
 import Search from '../Search';
 import EventModal from '../EventModal';
 import { useStoreContext } from '../../utils/GlobalState';
 import API from '../../utils/eventAPI';
-import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
-import "./style.css";
+import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_EVENT_ACTIVE } from '../../utils/actions';
+import './style.css';
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
     const [show, setShow] = useState(false);
+    const [dropdownOpen, setDropdown] = useState(false);
 
     useEffect(() => {
         console.log('state', state);
@@ -20,16 +22,21 @@ function CreateEvent() {
     const handleClose = () => {
         setShow(false);
         dispatch({
-            type: UPDATE_ACTIVE,
-            active: 'upcoming'
+            type: UPDATE_EVENT_ACTIVE,
+            eventActive: 'upcoming'
         })
     }
 
+    const toggle = () => {
+        setDropdown(!dropdownOpen);
+    };
+
     const handleFormSubmit = async event => {
+        console.log("EVENT DATE ON SUBMIT", state.newEvent.event_date);
         event.preventDefault();
         let initialEvent = await API.saveEvent({
             event_name: state.newEvent.event_name,
-            event_date: state.newEvent.event_date,
+            event_date: state.newEvent.event_date.split('T')[0],
             event_time: state.newEvent.event_time,
             event_location: state.newEvent.event_location,
             event_note: state.newEvent.event_note,
@@ -40,7 +47,13 @@ function CreateEvent() {
         });
         let eventImage = document.getElementById('event_image').files[0];
         let eventid = initialEvent.data.id
-
+        // proceed to save call if user selected to receive a call
+        if (state.newEvent.call_time) {
+            API.saveCall(eventid, {
+                call_time: state.newEvent.call_time,
+                call_type: state.newEvent.call_type
+            })
+        };
         // proceed to save image and update event with image link if image is detected AND initial event data was saved
         if (eventImage && initialEvent.data) {
             let formData = new FormData();
@@ -62,24 +75,38 @@ function CreateEvent() {
     };
 
     return (
-        <container className="App">
-
-            <input type="text" name="event_name" required onChange={state.handleInputChange} />
-            <br />
-            <DatePicker value={state.newEvent && state.newEvent.event_date ? new Date(state.newEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
-            <br />
-            <TimePicker onChange={state.handleTimeChange} disableClock={true} />
-            <br />
-            <Search />
-            <br />
-            <textarea name="event_note" onChange={state.handleInputChange} />
-            <br />
+        <div className="card-body">
+            <label className="font-weight-bold">Name Your Date</label>
+            <p><input className="form-control" type="text" name="event_name" required onChange={state.handleInputChange} /></p>
+            <label className="font-weight-bold"> Set Date Time</label>
+            <p>
+                <DatePicker className="mr-8" value={state.newEvent && state.newEvent.event_date ? new Date(state.newEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
+                <TimePicker onChange={state.handleTimeChange} disableClock={true} />
+            </p>
+            <label className="font-weight-bold">Set Date Location</label>
+            <p><Search /></p>
+            <label className="font-weight-bold">Add Notes (optional)</label>
+            <p><textarea className="form-control" name="event_note" onChange={state.handleInputChange} /></p>
+            <div className="call-container">
+                <label className="font-weight-bold">Schedule a Call (optional)</label>
+                <p><TimePicker onChange={state.handleCallTime} disableClock={true} /></p>
+                <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle caret>
+                        {state.newEvent && state.newEvent.call_type ? state.newEvent.call_type : "Call Type"}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem name="call_type" onClick={state.handleInputChange}>Best Friend Breakup</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem name="call_type" onClick={state.handleInputChange}>Family Emergency</DropdownItem>
+                    </DropdownMenu>
+                </ButtonDropdown>
+            </div>
+            <label className="font-weight-bold">Image Upload (optional)</label>
             <input type="file" id="event_image" />
-            <br />
-            <button onClick={handleFormSubmit}>Submit</button>
+            <p><button className="btn btn-primary mx-auto" onClick={handleFormSubmit} id="submit-button">Submit</button></p>
             <EventModal show={show} handleClose={handleClose} />
 
-        </container>
+        </div>
     );
 }
 

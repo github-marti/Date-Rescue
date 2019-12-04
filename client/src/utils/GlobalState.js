@@ -3,7 +3,9 @@ import {
   LOGIN_USER,
   LOGOUT_USER,
   SET_RELOAD,
-  UPDATE_ACTIVE,
+  SET_LOCATION,
+  UPDATE_EVENT_ACTIVE,
+  UPDATE_HOME_ACTIVE,
   SET_NEW_EVENT,
   SET_UPCOMING_EVENT,
   SET_ALL_EVENTS,
@@ -14,6 +16,7 @@ import {
   ADD_LIKE,
   ADD_DISLIKE
 } from './actions';
+import moment from 'moment';
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -39,10 +42,22 @@ const reducer = (state, action) => {
         reload: !state.reload
       }
 
-    case UPDATE_ACTIVE:
+    case SET_LOCATION:
       return {
         ...state,
-        active: action.active
+        locations: action.locations
+      }
+
+    case UPDATE_EVENT_ACTIVE:
+      return {
+        ...state,
+        eventActive: action.eventActive
+      }
+
+    case UPDATE_HOME_ACTIVE:
+      return {
+        ...state,
+        homeActive: action.homeActive
       }
 
     case SET_NEW_EVENT:
@@ -52,7 +67,6 @@ const reducer = (state, action) => {
       }
 
     case SET_UPCOMING_EVENT:
-      console.log(action);
       return {
         ...state,
         upcomingEvent: action.event
@@ -101,9 +115,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_LIKE:
+      console.log("addinglike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        likes: state.locations.map(location => {
           if (location.id === action.id) {
             location.likes += 1
           }
@@ -112,9 +127,10 @@ const reducer = (state, action) => {
       }
 
     case ADD_DISLIKE:
+      console.log("addingdislike")
       return {
         ...state,
-        locations: state.locations.map(location => {
+        dislikes: state.locations.map(location => {
           if (location.id === action.id) {
             location.dislikes += 1
           }
@@ -160,14 +176,23 @@ const StoreProvider = ({ value = [], ...props }) => {
     handleInputChange: event => {
       let name = event.target.name;
       let value = event.target.value;
-      dispatch({
-        type: UPDATE_EVENT,
-        column: name,
-        update: value
-      });
+      if (name === 'call_type') {
+        dispatch({
+          type: UPDATE_EVENT,
+          column: name,
+          update: event.target.innerText
+        })
+      } else {
+        dispatch({
+          type: UPDATE_EVENT,
+          column: name,
+          update: value
+        });
+      };
     },
     handleDateChange: date => {
-      let eventDate = date.toISOString();
+      let eventDate = moment.utc(date).local().format();
+      console.log("EVENT DATE", eventDate);
       dispatch({
         type: UPDATE_EVENT,
         column: "event_date",
@@ -180,6 +205,13 @@ const StoreProvider = ({ value = [], ...props }) => {
         column: "event_time",
         update: time
       });
+    },
+    handleCallTime: time => {
+      dispatch({
+        type: UPDATE_EVENT,
+        column: "call_time",
+        update: time
+      })
     }
   });
 

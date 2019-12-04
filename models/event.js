@@ -1,14 +1,14 @@
 module.exports = function (sequelize, DataTypes) {
   let Event = sequelize.define("Event", {
     event_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
     event_time: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     event_name: {
@@ -49,16 +49,12 @@ module.exports = function (sequelize, DataTypes) {
       foreignKey: {
         allowNull: false
       }
-    })
-  }
+    });
 
-  Event.associate = function (models) {
     Event.hasOne(models.Call, {
       onDelete: 'cascade'
     });
-  };
 
-  Event.associate = function (models) {
     Event.hasOne(models.Text, {
       onDelete: 'cascade'
     });

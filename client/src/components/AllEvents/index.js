@@ -8,7 +8,7 @@ function AllEvents() {
     const [state, dispatch] = useStoreContext();
 
     useEffect(() => {
-        API.getEvents(1)
+        API.getEvents(state.userid)
             .then(results => {
                 console.log(results.data);
                 dispatch({
@@ -32,6 +32,9 @@ function AllEvents() {
                             event_location={event.event_location}
                             event_note={event.event_note}
                             event_date_picture={event.event_date_picture}
+                            call_time={event.Call ? event.Call.call_time : null}
+                            call_type={event.Call ? event.Call.call_type : null}
+                            callid={event.Call ? event.Call.id : null}
                             active={event.active}
                             shortid={event.shortid}
                         />

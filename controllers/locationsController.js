@@ -3,12 +3,8 @@ const db = require("../models");
 module.exports = {
     
     findAll: function(req, res) {
-        db.Location.findAll({
-            where: {
-                id: req.params.id
-            }
-        })
-          .sort({ ascend: 1 })
+        db.Location.findAll({})
+        //   .sort({ ascend: 1 })
           .then(results => res.json(results))
           .catch(err => res.status(422).json(err));
       },
@@ -46,5 +42,24 @@ module.exports = {
         })
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
-    }        
+    },
+    updatelike: function (req, res) {
+        console.log(req.body, req.params.id)
+        db.Location.update({location_like:req.body.likes+1},
+            {where: {
+                id: req.params.id
+            }
+        })
+        .then(results => res.json(results))
+        .catch(err => res.status(422).send(err))
+    },
+    updatedislike: function (req, res) {
+        db.Location.update({location_dislike:req.body.dislikes+1},
+            {where: {
+                id: req.params.id
+            }
+        })
+        .then(results => res.json(results))
+        .catch(err => res.status(422).send(err))
+    }     
 }

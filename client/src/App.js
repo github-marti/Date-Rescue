@@ -9,8 +9,7 @@ import SignUp from "./components/SignUp";
 import UpcomingEvent from "./components/UpcomingEvent";
 import AllEvents from "./components/AllEvents"
 import { StoreProvider } from "./utils/GlobalState";
-import EventTab from "./components/EventTab";
-import LocationForm from "./components/LocationForm"
+import Location from "./components/LocationView"
 function App() {
 
   return (
@@ -24,7 +23,7 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/event/upcoming" component={UpcomingEvent} />
             <Route exact path="/events" component={AllEvents} />
-            <Route exact path="/location" component={LocationForm} />
+            <Route exact path="/location" component={Location} />
             <Route component={Login} />
           </Switch>
         </StoreProvider>

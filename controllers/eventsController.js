@@ -4,6 +4,9 @@ const shortid = require('shortid');
 module.exports = {
     getAll: function (req, res) {
         db.Event.findAll({
+            include: [
+                { model: db.Call }
+            ],
             where: {
                 UserId: req.user.id
             },
@@ -13,7 +16,10 @@ module.exports = {
             ]
         })
         .then(results => res.json(results))
-        .catch(err => res.status(422).json(err))
+        .catch(err => {
+            console.log(err);
+            res.send(err);
+        })
     },
     getOne: function (req, res) {
         db.Event.findOne({
@@ -32,11 +38,11 @@ module.exports = {
         })
         .then(results => {
             // get the createdAt date from the results
-            let eventDate = Date.parse(`${results.dataValues.event_date.toISOString().split('T')[0]}T${results.dataValues.event_time}`);
+            let eventDate = Date.parse(`${results.dataValues.event_date.split('T')[0]}T${results.dataValues.event_time}`);
 
             // get the current time and set it to UTC time
-            let currentDate = Date.now();
-
+            let currentDate = Date.parse(new Date());
+            
             // compare the createdAt date and current time
             if (results.dataValues.active && eventDate + 43200000 > currentDate) {
                 res.send(results.dataValues);

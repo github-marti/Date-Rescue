@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useStoreContext } from '../../utils/GlobalState';
+import './style.css';
 
 export default function CopyLink(props) {
 
@@ -25,6 +26,7 @@ export default function CopyLink(props) {
             }
             <form>
                 <textarea
+                    className="form-control"
                     ref={textAreaRef}
                     value={`localhost:3000/events/${props.shortid}`}
                 />

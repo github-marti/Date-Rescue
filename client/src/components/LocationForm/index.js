@@ -3,7 +3,7 @@ import API from '../../utils/locationAPI';
 import FormData from 'form-data';
 import "./style.css";
 
-function CreateLocation() {
+function CreateLocation(props) {
 
     const handleFormSubmit = event => {
         event.preventDefault();
@@ -16,10 +16,13 @@ function CreateLocation() {
         }
         console.log(obj)
         API.saveLocation(obj);
+        props.handleClose();
     }
+    
 
     return (
-        <div className="location">
+        <div className="Location">
+
             <form onSubmit={handleFormSubmit}>
                 <div class="form-row" style={{}}>
                     <div class="form-group col-md-6">

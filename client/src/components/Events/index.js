@@ -4,7 +4,7 @@ import UpcomingEvent from '../UpcomingEvent';
 import CreateEvent from '../CreateEvent';
 import AllEvents from '../AllEvents';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_ACTIVE } from '../../utils/actions';
+import { UPDATE_EVENT_ACTIVE } from '../../utils/actions';
 
 function Events() {
     const [state, dispatch] = useStoreContext();
@@ -12,20 +12,20 @@ function Events() {
     const handleClick = (event) => {
         let name = event.target.name;
         dispatch({
-            type: UPDATE_ACTIVE,
-            active: name
+            type: UPDATE_EVENT_ACTIVE,
+            eventActive: name
         });
     }
 
     return (
-        <div>
+        <div className="events-container">
             <EventTab handleClick={handleClick} />
             <div className="events-container">
-                {state.active === 'upcoming' ? (
+                {state.eventActive === 'upcoming' ? (
                     <UpcomingEvent />
-                ) : state.active === 'create' ? (
+                ) : state.eventActive === 'create' ? (
                     <CreateEvent handleClick={handleClick}/>
-                ) : state.active === 'all' ? (
+                ) : state.eventActive === 'all' ? (
                     <AllEvents />
                 ) : (<UpcomingEvent />)}
             </div>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./style.css";
 
-const NavTop = function () {
+const NavTop = function (props) {
     return (
         <div className="dates">
 
@@ -15,10 +15,10 @@ const NavTop = function () {
                         </span>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="./components/HomePage">Home</NavLink>
+                        <NavLink name="events" onClick={props.handleClick}>Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="./components/LocationForm">Location</NavLink>
+                        <NavLink name="locations" onClick={props.handleClick}>Location</NavLink>
                     </NavItem>
                     <NavItem className="signOut">
                         <NavLink href="">Log Out</NavLink>

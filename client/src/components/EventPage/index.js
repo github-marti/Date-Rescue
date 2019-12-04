@@ -1,5 +1,7 @@
 import React from 'react';
+import Moment from 'react-moment';
 import API from '../../utils/eventAPI';
+import './style.css';
 
 class EventPage extends React.Component {
     state = {
@@ -10,7 +12,7 @@ class EventPage extends React.Component {
         event_note: "",
         event_date_picture: ""
     }
-    
+
 
     async componentDidMount() {
         const { shortid } = this.props.match.params;
@@ -39,22 +41,24 @@ class EventPage extends React.Component {
         if (this.state.event_name) {
             return (
                 <div>
-                    <h1>Public Event Page</h1>
-                    <p>Date: {this.state.event_date}</p>
-                    <p>Time: {this.formatTime(this.state.event_time)}</p>
-                    <p>Location: {this.state.event_location}</p>
-                    <p>Note: {this.state.event_note}</p>
-                    <iframe width="300" height="200" frameborder="0"
-                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowfullscreen></iframe>
-                    <p><img width="200" src={this.state.event_date_picture}></img></p>
+                    <h4 className="font-weight-bold title p-3">Your Friend's DateRescue Page</h4>
+                    <div className="p-3">
+                        <p><span className="font-weight-bold">Date:</span> <Moment date={this.state.event_date} format="MMMM Do YYYY" /></p>
+                        <p><span className="font-weight-bold">Time:</span> {this.formatTime(this.state.event_time)}</p>
+                        <p><span className="font-weight-bold">Location:</span> {this.state.event_location}</p>
+                        <iframe width="300" height="200" frameBorder="0"
+                            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowFullScreen></iframe>
+                        <p><span className="font-weight-bold">Note:</span> {this.state.event_note}</p>
+                        <p><img width="100" src={this.state.event_date_picture}></img></p>
+                    </div>
                 </div>
             )
         } else {
             return (
                 <div>
-                    <h1>Sorry, this event address is either invalid or has expired.</h1>
-                    <h3>If you think there's been some sort of mistake, ask your friend to resend their unique event address,
-                    or if this is your event, login to Date Rescue and double-check the address is correct.</h3>
+                    <h4>Sorry, this event address is either invalid or has expired.</h4>
+                    <p>If you think there's been some sort of mistake, ask your friend to resend their unique event address,
+                    or if this is your event, login to Date Rescue and double-check the address is correct.</p>
                 </div>
             )
         }
