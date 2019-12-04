@@ -1,9 +1,8 @@
 import React from 'react';
 import API from '../../utils/locationAPI';
 import FormData from 'form-data';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 
-function CreateLocation() {
+function CreateLocation(props) {
 
     const handleFormSubmit = event => {
         event.preventDefault();
@@ -16,6 +15,7 @@ function CreateLocation() {
         }
         console.log(obj)
         API.saveLocation(obj);
+        props.handleClose();
     }
     
 
