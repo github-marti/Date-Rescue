@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from './node_modules/react';
+import { Container, Col, Form, FormGroup, Label, Input, Button, } from './node_modules/reactstrap';
+import { Redirect } from './node_modules/react-router-dom';
 import "./style.css";
-import axios from 'axios';
+import axios from './node_modules/axios';
 
 function SignUp() {
 

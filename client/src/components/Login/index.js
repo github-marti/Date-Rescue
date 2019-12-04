@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
+import React, { useState, useEffect } from './node_modules/react';
+import { Redirect } from './node_modules/react-router-dom';
+import axios from './node_modules/axios';
+import { Container, Col, Form, FormGroup, Label, Input, Button, } from './node_modules/reactstrap';
 import { useStoreContext } from '../../utils/GlobalState';
 import "./style.css";
 import { LOGIN_USER } from '../../utils/actions';
