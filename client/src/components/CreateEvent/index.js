@@ -7,7 +7,7 @@ import Search from '../Search';
 import EventModal from '../EventModal';
 import { useStoreContext } from '../../utils/GlobalState';
 import API from '../../utils/eventAPI';
-import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_ACTIVE } from '../../utils/actions';
+import { SET_NEW_EVENT, UPDATE_EVENT, UPDATE_EVENT_ACTIVE } from '../../utils/actions';
 
 function CreateEvent() {
     const [state, dispatch] = useStoreContext();
@@ -21,8 +21,8 @@ function CreateEvent() {
     const handleClose = () => {
         setShow(false);
         dispatch({
-            type: UPDATE_ACTIVE,
-            active: 'upcoming'
+            type: UPDATE_EVENT_ACTIVE,
+            eventActive: 'upcoming'
         })
     }
 

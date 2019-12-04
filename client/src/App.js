@@ -9,9 +9,6 @@ import SignUp from "./components/SignUp";
 import UpcomingEvent from "./components/UpcomingEvent";
 import AllEvents from "./components/AllEvents"
 import { StoreProvider } from "./utils/GlobalState";
-import Button from './components/LocationCard'
-// import EventTab from "./components/EventTab";
-// import LocationForm from "./components/LocationForm"
 import Location from "./components/LocationView"
 function App() {
 

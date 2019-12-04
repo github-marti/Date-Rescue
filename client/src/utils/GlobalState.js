@@ -4,7 +4,8 @@ import {
   LOGOUT_USER,
   SET_RELOAD,
   SET_LOCATION,
-  UPDATE_ACTIVE,
+  UPDATE_EVENT_ACTIVE,
+  UPDATE_HOME_ACTIVE,
   SET_NEW_EVENT,
   SET_UPCOMING_EVENT,
   SET_ALL_EVENTS,
@@ -47,10 +48,16 @@ const reducer = (state, action) => {
         locations: action.locations
       }
 
-    case UPDATE_ACTIVE:
+    case UPDATE_EVENT_ACTIVE:
       return {
         ...state,
-        active: action.active
+        eventActive: action.eventActive
+      }
+
+    case UPDATE_HOME_ACTIVE:
+      return {
+        ...state,
+        homeActive: action.homeActive
       }
 
     case SET_NEW_EVENT:
