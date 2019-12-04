@@ -7,11 +7,11 @@ export default {
     },
 
     getAllLocations: function () {
-        return axios.get(`/api/locations/all`).then(data=>{return data})
+        return axios.get(`/api/locations/all`).then(data=>{return data});
     },
     // Gets the location with the given id that will filter city name
     getFilterLocation: function (locationid, location_city) {
-        return axios.get(`/api/locations/id/${locationid}?${location_city}=`);
+        return axios.get(`/api/locations/location_city/${location_city}=`).then(data=>{return data});
     },
     // Saves the location to the database
     saveLocation: function (locationData) {

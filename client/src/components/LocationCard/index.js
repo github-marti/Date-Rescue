@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import API from '../../utils/locationAPI';
-import { StoreProvider, useStoreContext } from '../../utils/GlobalState';
-import { ADD_LIKE, ADD_DISLIKE } from '../../utils/actions';
+import { useStoreContext } from '../../utils/GlobalState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons'
 
 function CreateCard(props) {
 
     const [state, dispatch] = useStoreContext();
-
-    useEffect(() => {
-        console.log('state', state);
-    }, [state.location]);
 
     const handleLikeIncrement = event => {
         API.updateLike({likes:state.locations[props.i].location_like, id:state.locations[props.i].id}).then(data=>{
@@ -31,6 +26,7 @@ function CreateCard(props) {
     }
     const thumbsUp = <FontAwesomeIcon icon={faThumbsUp} />
     const thumbsDown = <FontAwesomeIcon icon={faThumbsDown} />
+    
 
     return(
        

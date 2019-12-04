@@ -45,7 +45,8 @@ const reducer = (state, action) => {
     case SET_LOCATION:
       return {
         ...state,
-        locations: action.locations
+        locations: action.locations,
+        filteredLocations: action.locations
       }
 
     case UPDATE_EVENT_ACTIVE:
@@ -165,6 +166,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       likes: 0,
       dislikes: 0
     }],
+    filteredLocations: [],
     formatTime: time => {
       let hour = time.split(':')[0];
       if (hour.charAt(0) === '0') {
@@ -213,6 +215,7 @@ const StoreProvider = ({ value = [], ...props }) => {
         update: time
       })
     }
+
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

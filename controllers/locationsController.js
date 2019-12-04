@@ -32,17 +32,6 @@ module.exports = {
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
     },
-    update: function (req, res) {
-        db.Location.update(req.body,
-            {where: {
-                id: req.params.id,
-                location_like: req.body.location_like,
-                location_dislike: req.body.location_dislike
-            }
-        })
-        .then(results => res.json(results))
-        .catch(err => res.status(422).send(err))
-    },
     updatelike: function (req, res) {
         console.log(req.body, req.params.id)
         db.Location.update({location_like:req.body.likes+1},
@@ -62,4 +51,4 @@ module.exports = {
         .then(results => res.json(results))
         .catch(err => res.status(422).send(err))
     }     
-}
+};
