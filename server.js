@@ -35,8 +35,45 @@ require("./routes/user-api-routes")(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: false }).then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync({ force: false }).then(function () {
+  app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });
+
+// handle time management
+function getNextCall() {
+  db.Call.findOne({
+    include: [
+      { model: db.Event}
+    ],
+    order: [
+      ['call_time', 'ASC']
+    ]
+  })
+    .then(results => {
+      let upcomingCall = `${results.dataValues.Event.dataValues.event_date.split('T')[0]}T${results.dataValues.call_time}:00.000`;
+      let callid = results.dataValues.id;
+      makeCall(upcomingCall, callid)
+    });
+};
+
+function makeCall(upcomingCall, callid) {
+  let nextCall = Date.parse(upcomingCall);
+  let currentTime = Date.parse(new Date());
+  let delta = nextCall - currentTime;
+  console.log('DELTA', delta);
+  console.log('NEXT CALL', nextCall, 'CURRENT TIME', currentTime)
+  setTimeout(() => {
+    db.Call.destroy({
+      where: {
+        id: callid
+      }
+    });
+    getNextCall();
+  }, delta);
+};
+
+getNextCall();
+
+
