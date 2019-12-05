@@ -71,7 +71,9 @@ function EventCard(props) {
                 } else {
                     API.saveCall(props.id, {
                         call_time: state.newEvent.call_time,
-                        call_type: state.newEvent.call_type
+                        call_type: state.newEvent.call_type,
+                        event_date: state.newEvent.event_date,
+                        event_time: state.newEvent.event_time
                     })
                 };
             };
