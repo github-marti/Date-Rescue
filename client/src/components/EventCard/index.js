@@ -14,6 +14,10 @@ function EventCard(props) {
     const [updateShow, setUpdateShow] = useState(false);
     const [cancelShow, setCancelShow] = useState(false);
 
+    useEffect(() => {
+        console.log(state);
+    }, [state.reload]);
+
     const handleShow = event => {
         let name = event.target.name;
         if (name === 'update') {

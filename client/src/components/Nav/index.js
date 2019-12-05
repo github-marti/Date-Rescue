@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./style.css";
 
@@ -21,7 +20,7 @@ const NavTop = function (props) {
                         <NavLink name="locations" onClick={props.handleClick}>Location</NavLink>
                     </NavItem>
                     <NavItem className="signOut">
-                        <NavLink href="">Log Out</NavLink>
+                        <NavLink onClick={props.handleLogout}>Log Out</NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>
