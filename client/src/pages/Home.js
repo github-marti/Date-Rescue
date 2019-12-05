@@ -44,6 +44,12 @@ function Home() {
         })
     };
 
+    const handleLogout = () => {
+        console.log('click');
+        userAPI.logout();
+        setRedirect(true);
+    }
+
     const renderRedirect = () => {
         if (redirect) {
             return <Redirect to='/' />
@@ -53,7 +59,7 @@ function Home() {
     return (
         <>
             {renderRedirect()}
-            <Nav handleClick={handleClick} />
+            <Nav handleClick={handleClick} handleLogout={handleLogout} />
             {state.homeActive === 'events' ? <Events />
                 : state.homeActive === 'locations' ? <LocationView />
                     : <Events />}
