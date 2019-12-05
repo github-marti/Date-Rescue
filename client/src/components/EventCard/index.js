@@ -145,7 +145,8 @@ function EventCard(props) {
                             <div>
                                 <CopyLink shortid={props.shortid} />
                                 <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>
-                                <button className="btn btn-secondary" onClick={cancelCall}>Cancel Call</button>
+                                {props.call_time ? (<button className="btn btn-secondary" onClick={cancelCall}>Cancel Call</button>)
+                                : <></>}
                                 <button className="btn btn-secondary" name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}
