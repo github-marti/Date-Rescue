@@ -30,8 +30,9 @@ function CreateCard(props) {
     
 
     return(
-       
-        <div id="card">
+       <span className='border-2 border-primary'>
+           <br></br>
+        <div className="cardDiv">
             <h4>{props.data.location_name}</h4>
             <p>{props.data.location_address}</p>
             <p>{props.data.location_city}, {props.data.location_state}. {props.data.location_zip}</p>
@@ -39,6 +40,8 @@ function CreateCard(props) {
             <button onClick={handleLikeIncrement} id="thumbsup">{thumbsUp} {state.locations[props.i].location_like||0}</button>
             <button onClick={handleDisLikeIncrement} id="thumbsdown">{thumbsDown} {state.locations[props.i].location_dislike||0}</button>
         </div>
+        <br></br>
+        </span>
     )
 }
        
