@@ -20,6 +20,8 @@ function AllEvents() {
             })
     }, [state.reload]);
 
+    console.log('ALL EVENTS', state.allEvents);
+
     return (
         <div>
             {state.allEvents[0] ? (
