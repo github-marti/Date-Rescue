@@ -3,7 +3,8 @@ import { useStoreContext } from '../../utils/GlobalState'
 import API from '../../utils/locationAPI';
 import LocationForm from "./../LocationForm";
 import LocationCard from "./../LocationCard";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import "./style.css";
 
 function ViewCard() {
 
@@ -52,22 +53,21 @@ function ViewCard() {
     }, [likebtn, show])
 
     return (
-        <div>
-            <nav className="navbar navbar-light bg-light">
-                <a className="navbar-brand">Have a recommendation that is not listed? Click<Button onClick={handleShow}>here</Button>to add one.</a>
+        <div id="bgi">
+            <nav className="navbar navbar-light" id="nav">
+                <a className="navbar-brand" id="text">Have a recommendation that is not listed? Click<Button onClick={handleShow} id="link">here</Button>to add one.</a>
                 <form className="form-inline">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search By City" aria-label="Search" onChange={e => handleSearchChange(e)} />
                 </form>
             </nav>
-
+            <div id="card">
             {location.length ? location.map((location, i) => {
                 return <LocationCard click={btnClick} data={location} i={i}></LocationCard>
             }) : state.locations ? state.locations.map((location, i) => {
                 return <LocationCard click={btnClick} data={location} i={i}></LocationCard>
             }) : ""}
+            </div>
             <Modal isOpen={show} onHide={handleClose}>
-                <ModalHeader closeButton>
-                </ModalHeader>
                 <ModalBody><LocationForm handleClose={handleClose}/></ModalBody>
                 <ModalFooter>
                     <Button variant="secondary" onClick={handleClose}>
