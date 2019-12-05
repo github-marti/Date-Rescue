@@ -11,12 +11,14 @@ function UpcomingEvent() {
     useEffect(() => {
         API.getEvents(state.userid)
             .then(results => {
-                let upcomingEvents = results.data.filter(el => el.active && (Date.parse(`${el.event_date}T${el.event_time}`) + 10800000) > Date.parse(new Date()));
-                console.log('show upcoming event', upcomingEvents[0])
-                dispatch({
-                    type: SET_UPCOMING_EVENT,
-                    event: upcomingEvents[0]
-                });
+                if (results) {
+                    let upcomingEvents = results.data.filter(el => el.active && (Date.parse(`${el.event_date}T${el.event_time}`) + 10800000) > Date.parse(new Date()));
+                    console.log('show upcoming event', upcomingEvents[0])
+                    dispatch({
+                        type: SET_UPCOMING_EVENT,
+                        event: upcomingEvents[0]
+                    });
+                };
             });
     }, [state.reload]);
 

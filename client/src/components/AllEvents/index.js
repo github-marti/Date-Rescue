@@ -10,11 +10,13 @@ function AllEvents() {
     useEffect(() => {
         API.getEvents(state.userid)
             .then(results => {
-                console.log(results.data);
-                dispatch({
-                    type: SET_ALL_EVENTS,
-                    allEvents: results.data
-                })
+                if (results) {
+                    console.log(results.data);
+                    dispatch({
+                        type: SET_ALL_EVENTS,
+                        allEvents: results.data
+                    })
+                };
             })
     }, [state.reload]);
 
