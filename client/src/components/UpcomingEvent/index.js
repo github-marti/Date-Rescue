@@ -11,7 +11,8 @@ function UpcomingEvent() {
     useEffect(() => {
         API.getEvents(state.userid)
             .then(results => {
-                if (results) {
+                if (results.data) {
+                    console.log("this is", results)
                     let upcomingEvents = results.data.filter(el => el.active && (Date.parse(`${el.event_date}T${el.event_time}`) + 10800000) > Date.parse(new Date()));
                     console.log('show upcoming event', upcomingEvents[0])
                     dispatch({
