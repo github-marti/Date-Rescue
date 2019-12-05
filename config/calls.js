@@ -6,7 +6,6 @@ const client = require('twilio')(accountSid, authToken);
 let callTimeout;
 
 const getUpcoming = () => {
-    console.log("GETTING UPCOMING!!!!\n\n");
     db.Call.findOne({
         include: [
             {
@@ -26,10 +25,10 @@ const getUpcoming = () => {
     })
         .then(results => {
             if (results) {
-                console.log('RESULTS', results.call_time);
                 let upcomingCall = Date.parse(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`);
                 let currentTime = Date.parse(new Date());
                 let callid = results.shortid;
+                console.log("shortid in getupcoming", callid);
                 let phoneNumber = results.Event.User.phoneNumber;
                 if (upcomingCall - currentTime > -900000) {
                     startTimer(upcomingCall, callid, phoneNumber);
@@ -45,11 +44,11 @@ const getUpcoming = () => {
 
 const startTimer = (upcomingCall, callid, phoneNumber) => {
     console.log("STARTING TIMER!!!\n\n")
+    console.log("shortid in startTimer", callid);
     let currentTime = Date.parse(new Date());
     let delta = upcomingCall - currentTime;
     console.log("DELTA", delta);
     callTimeout = setTimeout(() => {
-        console.log('call');
         client.calls
             .create({
                 url: 'http://demo.twilio.com/docs/voice.xml',
@@ -68,12 +67,9 @@ const startTimer = (upcomingCall, callid, phoneNumber) => {
 };
 
 const updateTimer = (newCall, callid, phoneNumber) => {
-    console.log('TIMER TO BE UPDATED', callTimeout);
+    console.log('shortid in update timer', callid);
     clearTimeout(callTimeout);
-    console.log('TIMER CLEARED');
-    console.log("NEW CALL", newCall);
     startTimer(newCall, callid, phoneNumber);
-    console.log('NEW TIMER STARTED FOR', phoneNumber);
 };
 
 module.exports = { getUpcoming, startTimer, updateTimer };

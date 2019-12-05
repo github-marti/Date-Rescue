@@ -13,7 +13,7 @@ function UpcomingEvent() {
             .then(results => {
                 console.log("RESULTS UPCOMING", results.data);
                 if (results.data) {
-                    let upcomingEvents = results.data.filter(el => el.active && (Date.parse(`${el.event_date}T${el.event_time}`) + 10800000) > Date.parse(new Date()));
+                    let upcomingEvents = results.data.filter(el => el.active && (Date.parse(`${el.event_date.split('T')[0]}T${el.event_time}`) + 10800000) > Date.parse(new Date()));
                     console.log('show upcoming event', upcomingEvents[0])
                     dispatch({
                         type: SET_UPCOMING_EVENT,
@@ -43,7 +43,7 @@ function UpcomingEvent() {
                     />
                 </>
             ) : (
-                    <p>You don't have any upcoming events.</p>
+                    <h5 className="m-3"><em>You don't have any upcoming events.</em></h5>
                 )}
         </div>
     )

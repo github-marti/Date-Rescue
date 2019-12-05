@@ -52,8 +52,7 @@ function CreateEvent() {
             API.saveCall(eventid, {
                 call_time: state.newEvent.call_time,
                 event_date: state.newEvent.event_date.split('T')[0],
-                call_type: state.newEvent.call_type,
-                phoneNumber: state.phoneNumber
+                call_type: state.newEvent.call_type
             })
         };
         // proceed to save image and update event with image link if image is detected AND initial event data was saved
