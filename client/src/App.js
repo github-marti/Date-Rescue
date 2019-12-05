@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import EventPage from "./components/EventPage";
 import SignUp from "./components/SignUp";
 import { StoreProvider } from "./utils/GlobalState";
+import LocationView from "./components/LocationView"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/events/:shortid" component={EventPage} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/recommendations" component={LocationView} />
             <Route component={Login} />
           </Switch>
         </StoreProvider>
