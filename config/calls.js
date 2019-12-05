@@ -28,9 +28,12 @@ const getUpcoming = () => {
             if (results) {
                 console.log('RESULTS', results.call_time);
                 let upcomingCall = Date.parse(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`);
-                let callid = results.id;
+                let currentTime = Date.parse(new Date());
+                let callid = results.shortid;
                 let phoneNumber = results.Event.User.phoneNumber;
-                startTimer(upcomingCall, callid, phoneNumber);
+                if (upcomingCall - currentTime > -900000) {
+                    startTimer(upcomingCall, callid, phoneNumber);
+                };
             } else {
                 console.log('no upcoming calls');
             }
@@ -42,11 +45,11 @@ const getUpcoming = () => {
 
 const startTimer = (upcomingCall, callid, phoneNumber) => {
     console.log("STARTING TIMER!!!\n\n")
-    let nextCall = upcomingCall;
     let currentTime = Date.parse(new Date());
-    let delta = nextCall - currentTime;
+    let delta = upcomingCall - currentTime;
     console.log("DELTA", delta);
     callTimeout = setTimeout(() => {
+        console.log('call');
         client.calls
             .create({
                 url: 'http://demo.twilio.com/docs/voice.xml',
