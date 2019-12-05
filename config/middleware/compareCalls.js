@@ -27,13 +27,14 @@ module.exports = function () {
                 .then(results => {
                     let newCall = Date.parse(new Date(`${req.body.event_date}T${req.body.call_time}:00.000`));
                     let callid = req.shortid;
+                    let callType = req.body.call_type
                     console.log('shortid after results', callid);
                     let phoneNumber = req.user.phoneNumber;
                     if (results) {
                         let upcomingCall = Date.parse(new Date(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`));
                         if (newCall < upcomingCall) {
                             console.log('need to update timer!');
-                            updateTimer(newCall, req.shortid, phoneNumber);
+                            updateTimer(newCall, req.shortid, phoneNumber, callType);
                         }
                     } else {
                         console.log('shortid in else', callid);
