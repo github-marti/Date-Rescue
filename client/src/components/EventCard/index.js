@@ -140,8 +140,8 @@ function EventCard(props) {
                                 <p>Call type: {props.call_type}</p>
                             </div>) :
                             <p>You don't have a call scheduled.</p>}
-                        <p><img width="100px" src={props.event_date_picture}></img></p>
-                        {(Date.parse(`${props.event_date}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
+                        <p><img width="200px" src={props.event_date_picture}></img></p>
+                        {(Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
                             <div>
                                 <CopyLink shortid={props.shortid} />
                                 <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>

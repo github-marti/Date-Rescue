@@ -25,7 +25,8 @@ module.exports = {
             res.json({
                 email: req.user.email,
                 username: req.user.username,
-                id: req.user.id
+                id: req.user.id,
+                phoneNumber: req.user.phoneNumber
             })
         }
     }

@@ -6,7 +6,6 @@ const client = require('twilio')(accountSid, authToken);
 let callTimeout;
 
 const getUpcoming = () => {
-    console.log("GETTING UPCOMING!!!!\n\n");
     db.Call.findOne({
         include: [
             {
@@ -26,13 +25,14 @@ const getUpcoming = () => {
     })
         .then(results => {
             if (results) {
-                console.log('RESULTS', results.call_time);
                 let upcomingCall = Date.parse(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`);
                 let currentTime = Date.parse(new Date());
                 let callid = results.shortid;
+                let callType = results.call_type;
+                console.log("shortid in getupcoming", callid);
                 let phoneNumber = results.Event.User.phoneNumber;
                 if (upcomingCall - currentTime > -900000) {
-                    startTimer(upcomingCall, callid, phoneNumber);
+                    startTimer(upcomingCall, callid, phoneNumber, callType);
                 };
             } else {
                 console.log('no upcoming calls');
@@ -43,14 +43,16 @@ const getUpcoming = () => {
         });
 };
 
-const startTimer = (upcomingCall, callid, phoneNumber) => {
+const startTimer = (upcomingCall, callid, phoneNumber, callType) => {
     console.log("STARTING TIMER!!!\n\n")
+    console.log("shortid in startTimer", callid);
+    console.log("calltype", callType);
     let currentTime = Date.parse(new Date());
     let delta = upcomingCall - currentTime;
     console.log("DELTA", delta);
     callTimeout = setTimeout(() => {
-        console.log('call');
-        client.calls
+        if (callType === 'Family Emergency') {
+            client.calls
             .create({
                 url: 'http://demo.twilio.com/docs/voice.xml',
                 to: `+1${phoneNumber}`,
@@ -58,6 +60,16 @@ const startTimer = (upcomingCall, callid, phoneNumber) => {
             })
             .then(call => console.log(call.sid))
             .catch(err => console.log(err));
+        } else if (callType === 'Best Friend Breakup') {
+            client.calls
+            .create({
+                url: 'https://handler.twilio.com/twiml/EH6a3dcba4b4d91fdfb9c9c2752d90da77',
+                to: `+1${phoneNumber}`,
+                from: '+19088420029'
+            })
+            .then(call => console.log(call.sid))
+            .catch(err => console.log(err));
+        }
         db.Call.destroy({
             where: {
                 shortid: callid
@@ -68,12 +80,9 @@ const startTimer = (upcomingCall, callid, phoneNumber) => {
 };
 
 const updateTimer = (newCall, callid, phoneNumber) => {
-    console.log('TIMER TO BE UPDATED', callTimeout);
+    console.log('shortid in update timer', callid);
     clearTimeout(callTimeout);
-    console.log('TIMER CLEARED');
-    console.log("NEW CALL", newCall);
     startTimer(newCall, callid, phoneNumber);
-    console.log('NEW TIMER STARTED FOR', phoneNumber);
 };
 
 module.exports = { getUpcoming, startTimer, updateTimer };

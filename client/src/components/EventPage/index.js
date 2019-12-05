@@ -49,16 +49,16 @@ class EventPage extends React.Component {
                         <iframe width="300" height="200" frameBorder="0"
                             src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowFullScreen></iframe>
                         <p><span className="font-weight-bold">Note:</span> {this.state.event_note}</p>
-                        <p><img width="100" src={this.state.event_date_picture}></img></p>
+                        <p><img width="300px" src={this.state.event_date_picture}></img></p>
                     </div>
                 </div>
             )
         } else {
             return (
-                <div>
+                <div className="m-4">
                     <h4>Sorry, this event address is either invalid or has expired.</h4>
                     <p>If you think there's been some sort of mistake, ask your friend to resend their unique event address,
-                    or if this is your event, login to Date Rescue and double-check the address is correct.</p>
+                    or if this is your event, login to <a href="/">Date Rescue</a> and double-check the address is correct.</p>
                 </div>
             )
         }

@@ -42,7 +42,7 @@ function AllEvents() {
                         />
                     })}
                 </div>
-            ) : (<p>You don't have any events to show.</p>)}
+            ) : (<h5 className="m-3"><em>You don't have any events to show.</em></h5>)}
         </div>
     )
 };

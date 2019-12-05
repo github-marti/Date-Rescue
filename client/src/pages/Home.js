@@ -6,7 +6,7 @@ import eventAPI from "../utils/eventAPI";
 import userAPI from "../utils/userAPI";
 import LocationView from "../components/LocationView";
 import { useStoreContext } from "../utils/GlobalState";
-import { SET_NEW_EVENT, UPDATE_HOME_ACTIVE } from "../utils/actions";
+import { SET_NEW_EVENT, UPDATE_HOME_ACTIVE, LOGIN_USER } from "../utils/actions";
 
 function Home() {
     const [state, dispatch] = useStoreContext();
@@ -16,6 +16,13 @@ function Home() {
         userAPI.getUser()
             .then(results => {
                 if (results.data) {
+                    console.log("user results", results.data);
+                    dispatch({
+                        type: LOGIN_USER,
+                        username: results.data.username,
+                        userid: results.data.id,
+                        phoneNumber: results.data.phoneNumber
+                    });
                     eventAPI.getEvents(state.userid)
                         .then(results => {
                             dispatch({
