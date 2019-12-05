@@ -104,7 +104,7 @@ function CreateEvent() {
                 </ButtonDropdown>
             </div>
             <label className="font-weight-bold">Image Upload (optional)</label>
-            <input type="file" id="event_image" />
+            <p><input type="file" id="event_image" /></p>
             <p><button className="btn btn-primary mx-auto" onClick={handleFormSubmit} id="submit-button">Submit</button></p>
             <EventModal show={show} handleClose={handleClose} />
 
