@@ -64,6 +64,12 @@ function CreateLocation(props) {
                                     No
                                 </label>
                             </div>
+                            <div class="form-check">
+                                <input class="form-check-input active" type="radio" name="angel_shot" id="angel_shot" value="Not Sure" checked="checked" />
+                                <label class="form-check-label" htmlFor="angel_shot">
+                                    Not Sure
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

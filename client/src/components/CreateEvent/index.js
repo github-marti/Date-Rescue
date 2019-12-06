@@ -51,6 +51,7 @@ function CreateEvent() {
         if (state.newEvent.call_time) {
             API.saveCall(eventid, {
                 call_time: state.newEvent.call_time,
+                event_date: state.newEvent.event_date.split('T')[0],
                 call_type: state.newEvent.call_type
             })
         };
@@ -89,7 +90,7 @@ function CreateEvent() {
             <p><textarea className="form-control" name="event_note" onChange={state.handleInputChange} /></p>
             <div className="call-container">
                 <label className="font-weight-bold">Schedule a Call (optional)</label>
-                <p><TimePicker onChange={state.handleCallTime} disableClock={true} /></p>
+                <div><TimePicker onChange={state.handleCallTime} disableClock={true} /></div>
                 <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle caret>
                         {state.newEvent && state.newEvent.call_type ? state.newEvent.call_type : "Call Type"}
@@ -102,7 +103,7 @@ function CreateEvent() {
                 </ButtonDropdown>
             </div>
             <label className="font-weight-bold">Image Upload (optional)</label>
-            <input type="file" id="event_image" />
+            <p><input type="file" id="event_image" /></p>
             <p><button className="btn btn-primary mx-auto" onClick={handleFormSubmit} id="submit-button">Submit</button></p>
             <EventModal show={show} handleClose={handleClose} />
 

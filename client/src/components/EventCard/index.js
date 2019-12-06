@@ -14,6 +14,10 @@ function EventCard(props) {
     const [updateShow, setUpdateShow] = useState(false);
     const [cancelShow, setCancelShow] = useState(false);
 
+    useEffect(() => {
+        console.log(state);
+    }, [state.reload]);
+
     const handleShow = event => {
         let name = event.target.name;
         if (name === 'update') {
@@ -47,19 +51,29 @@ function EventCard(props) {
     const handleUpdate = async event => {
         try {
             event.preventDefault();
-            let eventData = state.newEvent
+            let eventData = {
+                event_date: state.newEvent.event_date,
+                event_location: state.newEvent.event_location,
+                event_name: state.newEvent.event_name,
+                event_note: state.newEvent.event_note,
+                event_time: state.newEvent.event_time
+            };
             let eventImage = document.getElementById('event_image').files[0];
             let updatedEvent = await API.updateEvent(props.id, eventData);
             if (state.newEvent.call_time || state.newEvent.call_type) {
                 if (props.call_time) {
                     API.updateCall(props.id, props.callid, {
                         call_time: state.newEvent.call_time,
-                        call_type: state.newEvent.call_type
+                        call_type: state.newEvent.call_type,
+                        event_date: state.newEvent.event_date,
+                        event_time: state.newEvent.event_time
                     })
                 } else {
                     API.saveCall(props.id, {
                         call_time: state.newEvent.call_time,
-                        call_type: state.newEvent.call_type
+                        call_type: state.newEvent.call_type,
+                        event_date: state.newEvent.event_date,
+                        event_time: state.newEvent.event_time
                     })
                 };
             };
@@ -82,15 +96,34 @@ function EventCard(props) {
     const handleCancel = event => {
         event.preventDefault();
         API.cancelEvent(props.id)
-            .then(results => {
-                setCancelShow(false);
-                dispatch({
-                    type: SET_RELOAD
-                });
+            .then(() => {
+                API.cancelCall(props.id, props.callid)
+                    .then(() => {
+                        setCancelShow(false);
+                        dispatch({
+                            type: SET_RELOAD
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             })
             .catch(err => {
                 console.log(err);
+            });
+    };
+
+    const cancelCall = () => {
+        API.cancelCall(props.id, props.callid)
+            .then(() => {
+                setCancelShow(false);
+                dispatch({
+                    type: SET_RELOAD
+                })
             })
+            .catch(err => {
+                console.log(err);
+            });
     };
 
     return (
@@ -108,7 +141,7 @@ function EventCard(props) {
                         </p>
                         <p>{props.event_location}</p>
                         <iframe width="300" height="100" frameBorder="0"
-                        src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
+                            src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
                         <p><span className="font-weight-bold">Notes: </span>{props.event_note}</p>
                         {props.call_time ?
                             (<div className="call-container">
@@ -117,11 +150,13 @@ function EventCard(props) {
                                 <p>Call type: {props.call_type}</p>
                             </div>) :
                             <p>You don't have a call scheduled.</p>}
-                        <p><img width="100px" src={props.event_date_picture}></img></p>
-                        {(Date.parse(`${props.event_date}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
+                        <p><img width="200px" src={props.event_date_picture}></img></p>
+                        {(Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
                             <div>
                                 <CopyLink shortid={props.shortid} />
                                 <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>
+                                {props.call_time ? (<button className="btn btn-secondary" onClick={cancelCall}>Cancel Call</button>)
+                                    : <></>}
                                 <button className="btn btn-secondary" name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}

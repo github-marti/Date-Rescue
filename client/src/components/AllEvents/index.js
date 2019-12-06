@@ -11,11 +11,13 @@ function AllEvents() {
     useEffect(() => {
         API.getEvents(state.userid)
             .then(results => {
-                console.log(results.data);
-                dispatch({
-                    type: SET_ALL_EVENTS,
-                    allEvents: results.data
-                })
+                if (results) {
+                    console.log(results.data);
+                    dispatch({
+                        type: SET_ALL_EVENTS,
+                        allEvents: results.data
+                    })
+                };
             })
     }, [state.reload]);
 
@@ -41,7 +43,7 @@ function AllEvents() {
                         />
                     })}
                 </div>
-            ) : (<p>You don't have any events to show.</p>)}
+            ) : (<h5 className="m-3"><em>You don't have any events to show.</em></h5>)}
         </div>
     )
 };

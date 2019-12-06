@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./style.css";
 
@@ -15,13 +14,13 @@ const NavTop = function (props) {
                         </span>
                     </NavItem>
                     <NavItem>
-                        <NavLink name="events" onClick={props.handleClick}>Home</NavLink>
+                        <NavLink name="events" onClick={props.handleClick} className="link">Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink name="locations" onClick={props.handleClick}>Location</NavLink>
+                        <NavLink name="locations" onClick={props.handleClick} className="link">Recommendations</NavLink>
                     </NavItem>
                     <NavItem className="signOut">
-                        <NavLink href="">Log Out</NavLink>
+                        <NavLink onClick={props.handleLogout} className="link">Log Out</NavLink>
                     </NavItem>
                 </Nav>
             </Navbar>
