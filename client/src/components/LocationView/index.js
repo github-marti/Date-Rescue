@@ -12,7 +12,9 @@ function ViewCard() {
     const [likebtn, setLikebtn] = useState(false)
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        console.log("triggering handleclose....")
+        setShow(false)};
     const handleShow = () => setShow(true);
 
     const [location, setLocation] = useState([]);
@@ -60,7 +62,7 @@ function ViewCard() {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search By City" aria-label="Search" onChange={e => handleSearchChange(e)} />
                 </form>
             </nav>
-            <div id="card">
+            <div id="cardcontainer">
             {location.length ? location.map((location, i) => {
                 return <LocationCard click={btnClick} data={location} i={i}></LocationCard>
             }) : state.locations ? state.locations.map((location, i) => {
