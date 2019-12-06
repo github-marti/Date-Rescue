@@ -3,6 +3,7 @@ import { useStoreContext } from '../../utils/GlobalState';
 import API from '../../utils/eventAPI';
 import EventCard from '../EventCard';
 import { SET_ALL_EVENTS } from '../../utils/actions';
+import './style.css';
 
 function AllEvents() {
     const [state, dispatch] = useStoreContext();
@@ -21,7 +22,7 @@ function AllEvents() {
     }, [state.reload]);
 
     return (
-        <div>
+        <div style={{}}>
             {state.allEvents[0] ? (
                 <div>
                     {state.allEvents.map(event => {

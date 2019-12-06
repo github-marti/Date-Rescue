@@ -55,6 +55,9 @@ const Login = function () {
     <div>
       {renderRedirect()}
       <div className="bcg1">
+        <span class="logo">
+          <img src={require("./redblock2.png")} height="150" width="200" />
+        </span>
         <Container className="login">
           <row>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
