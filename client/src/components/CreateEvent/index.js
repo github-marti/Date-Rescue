@@ -90,7 +90,7 @@ function CreateEvent() {
             <p><textarea className="form-control" name="event_note" onChange={state.handleInputChange} /></p>
             <div className="call-container">
                 <label className="font-weight-bold">Schedule a Call (optional)</label>
-                <p><TimePicker onChange={state.handleCallTime} disableClock={true} /></p>
+                <div><TimePicker onChange={state.handleCallTime} disableClock={true} /></div>
                 <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle caret>
                         {state.newEvent && state.newEvent.call_type ? state.newEvent.call_type : "Call Type"}

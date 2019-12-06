@@ -51,19 +51,29 @@ function EventCard(props) {
     const handleUpdate = async event => {
         try {
             event.preventDefault();
-            let eventData = state.newEvent
+            let eventData = {
+                event_date: state.newEvent.event_date,
+                event_location: state.newEvent.event_location,
+                event_name: state.newEvent.event_name,
+                event_note: state.newEvent.event_note,
+                event_time: state.newEvent.event_time
+            };
             let eventImage = document.getElementById('event_image').files[0];
             let updatedEvent = await API.updateEvent(props.id, eventData);
             if (state.newEvent.call_time || state.newEvent.call_type) {
                 if (props.call_time) {
                     API.updateCall(props.id, props.callid, {
                         call_time: state.newEvent.call_time,
-                        call_type: state.newEvent.call_type
+                        call_type: state.newEvent.call_type,
+                        event_date: state.newEvent.event_date,
+                        event_time: state.newEvent.event_time
                     })
                 } else {
                     API.saveCall(props.id, {
                         call_time: state.newEvent.call_time,
-                        call_type: state.newEvent.call_type
+                        call_type: state.newEvent.call_type,
+                        event_date: state.newEvent.event_date,
+                        event_time: state.newEvent.event_time
                     })
                 };
             };
@@ -146,7 +156,7 @@ function EventCard(props) {
                                 <CopyLink shortid={props.shortid} />
                                 <button className="btn btn-primary" name="update" onClick={handleShow}>Update Date</button>
                                 {props.call_time ? (<button className="btn btn-secondary" onClick={cancelCall}>Cancel Call</button>)
-                                : <></>}
+                                    : <></>}
                                 <button className="btn btn-secondary" name="cancel" onClick={handleShow}>Cancel Date</button>
                             </div>
                         ) : (<p></p>)}

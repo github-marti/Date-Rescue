@@ -6,7 +6,6 @@ module.exports = function () {
     return function (req, res, next) {
         if (req.body && req.body.call_time) {
             req.shortid = shortid.generate();
-            console.log('initial shortid', req.shortid);
             db.Call.findOne({
                 include: [
                     {
@@ -25,19 +24,19 @@ module.exports = function () {
                 ]
             })
                 .then(results => {
+                    console.log('req.body', req.body);
                     let newCall = Date.parse(new Date(`${req.body.event_date}T${req.body.call_time}:00.000`));
+                    console.log('newCall')
                     let callid = req.shortid;
-                    let callType = req.body.call_type
-                    console.log('shortid after results', callid);
                     let phoneNumber = req.user.phoneNumber;
                     if (results) {
                         let upcomingCall = Date.parse(new Date(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`));
+                        console.log('newcall', newCall, 'upcomingCall', upcomingCall);
                         if (newCall < upcomingCall) {
-                            console.log('need to update timer!');
-                            updateTimer(newCall, req.shortid, phoneNumber, callType);
+                            updateTimer(newCall, req.shortid, phoneNumber);
                         }
                     } else {
-                        console.log('shortid in else', callid);
+                        console.log('newcall', newCall);
                         updateTimer(newCall, callid, phoneNumber);
                     }
                 });
