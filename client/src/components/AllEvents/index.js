@@ -23,7 +23,7 @@ function AllEvents() {
 
     return (
         <div style={{}}>
-            {state.allEvents ? (
+            {state.allEvents[0] ? (
                 <div>
                     {state.allEvents.map(event => {
                         return <EventCard

@@ -153,11 +153,6 @@ const StoreProvider = ({ value = [], ...props }) => {
     authenticated: false,
     autocomplete: "",
     newEvent: {},
-    allEvents: [
-      {
-        event_name: "You don't have any events yet."
-      }
-    ],
     upcomingCall: {},
     upcomingText: {},
     locations: [{
