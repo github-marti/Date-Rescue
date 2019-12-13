@@ -14,8 +14,8 @@ function Home() {
 
     useEffect(() => {
         userAPI.getUser()
-            .then(results => 
-                console.log('INITIAL RESULTS', results);
+            .then(results => {
+                console.log('INITIAL RESULTS', results)
                 if (results.data) {
                     console.log("user results", results.data);
                     dispatch({
