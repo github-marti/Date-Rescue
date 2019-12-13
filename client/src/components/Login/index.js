@@ -98,7 +98,7 @@ const Login = function () {
                     />
                   </FormGroup>
                 </Col>
-                <h6>Not a member? <i className="click" color="light" onClick={handleClick}>Click Here</i></h6>
+                <h6>Not a member? <a href="#"><i className="click" color="light" onClick={handleClick}>Click Here</i></a></h6>
                 <Button className="btn1" color="success">Log In</Button>
               </Form>
             </Col>

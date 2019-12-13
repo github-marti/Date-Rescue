@@ -98,14 +98,9 @@ function SignUp() {
                   </FormGroup>
                 </Col>
                 <Button type="submit" className="btn" color="success">Join Today</Button>
+                <h6><a href="/">Return to login</a></h6>
               </Form></Col>
           </row>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
         </Container>
       </div>
   );
