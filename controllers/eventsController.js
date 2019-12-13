@@ -45,16 +45,7 @@ module.exports = {
 
                 // compare the createdAt date and current time
                 if (results.dataValues.active && eventDate + 43200000 > currentDate) {
-                    hbsObject = {
-                        event_name: results.event_name,
-                        event_date: results.event_date,
-                        event_time: results.event_time,
-                        event_location: results.event_location,
-                        event_note: results.event_note,
-                        event_date_picture: results.event_date_picture,
-                        API_KEY: process.env.API_KEY
-                    }
-                    res.render("event", hbsObject)
+                    res.send(results);
                 } else {
                     res.send("This page is no longer active!")
                 }
