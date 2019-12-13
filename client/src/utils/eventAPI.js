@@ -11,7 +11,7 @@ export default {
     },
     // Deletes the post with the given id
     getEventByShortId: function (shortid) {
-        return axios.get(`/events/${shortid}`);
+        return axios.get(`/api/events/${shortid}`);
     },
     // Saves an event to the database
     saveEvent: function (eventData) {

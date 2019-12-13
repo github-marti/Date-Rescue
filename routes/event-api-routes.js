@@ -17,7 +17,7 @@ const path = require('path');
 module.exports = function (app) {
   app.get("/api/users/:userid/events", eventsController.getAll);
   app.get("/api/users/:userid/events/:id", eventsController.getOne);
-  app.get("/events/:shortid", eventsController.getByShortId);
+  app.get("/api/events/:shortid", eventsController.getByShortId);
   app.post("/api/events", eventsController.create);
   app.post("/api/events/:id/images/upload", upload.single('image'), eventsController.uploadImage);
   app.put("/api/events/:id", eventsController.update);
