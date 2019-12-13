@@ -9,7 +9,10 @@ import { LOGIN_USER } from '../../utils/actions';
 const Login = function () {
 
   const [user, setUser] = useState();
-  const [redirect, setRedirect] = useState(false);
+  const [redirect, setRedirect] = useState({
+    home: false,
+    signup: false
+  });
 
   const [_, dispatch] = useStoreContext();
 
@@ -38,16 +41,26 @@ const Login = function () {
           userid: res.data.id,
           phoneNumber: res.data.phoneNumber
         })
-        setRedirect(true);
+        setRedirect({
+          home: true
+        });
       })
       .catch(err => {
         console.log(err)
       })
   };
 
+  const handleClick = event => {
+    setRedirect({
+      signup: true
+    })
+  }
+
   const renderRedirect = () => {
-    if (redirect) {
+    if (redirect.home) {
       return <Redirect to='/' />
+    } else if (redirect.signup) {
+      return <Redirect to="/signup" />
     }
   }
 
@@ -85,7 +98,7 @@ const Login = function () {
                     />
                   </FormGroup>
                 </Col>
-                <h6>Not a member <a href="/signup"><i className="click" color="light">Click Here</i></a></h6>
+                <h6>Not a member? <i className="click" color="light" onClick={handleClick}>Click Here</i></h6>
                 <Button className="btn1" color="success">Log In</Button>
               </Form>
             </Col>
