@@ -28,7 +28,7 @@ export default function CopyLink(props) {
                 <textarea
                     className="form-control"
                     ref={textAreaRef}
-                    value={`localhost:3000/events/${props.shortid}`}
+                    value={`https://date-rescue.herokuapp.com/events/${props.shortid}`}
                 />
             </form>
         </div>
