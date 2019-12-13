@@ -27,7 +27,7 @@ app.use(bodyParser());
 // Static directory
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-}
+};
 
 // Check for new calls and compare them with current loaded upcoming call
 app.use(compareCalls());
