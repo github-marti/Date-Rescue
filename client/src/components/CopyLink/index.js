@@ -1,10 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useStoreContext } from '../../utils/GlobalState';
 import './style.css';
 
 export default function CopyLink(props) {
 
-    const [state, _] = useStoreContext();
     const [copySuccess, setCopySuccess] = useState('');
     const textAreaRef = useRef(null);
 
@@ -28,7 +26,7 @@ export default function CopyLink(props) {
                 <textarea
                     className="form-control"
                     ref={textAreaRef}
-                    value={`https://date-rescue.herokuapp.com/events/${props.shortid}`}
+                    value={`https://date-rescue.herokuapp.com/#/events/${props.shortid}`}
                 />
             </form>
         </div>

@@ -24,11 +24,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser());
 
-// Static directory
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-};
-
 // Check for new calls and compare them with current loaded upcoming call
 app.use(compareCalls());
 
@@ -39,9 +34,14 @@ require("./routes/event-api-routes")(app);
 require("./routes/location-api-routes")(app);
 require("./routes/text-api-routes")(app);
 require("./routes/user-api-routes")(app);
+
 if (process.env.NODE_ENV === 'production') {
-  app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.use(express.static('client/build'));
+  app.use(function (req, res, next) {
+    if (req.method === 'GET' && req.accepts('html') && !req.is('json') &&
+      !req.path.includes('.')) {
+      res.sendFile('index.html', { root });
+    } else next();
   });
 };
 
@@ -54,4 +54,3 @@ db.sequelize.sync({ force: false }).then(function () {
 });
 
 getUpcoming();
-
