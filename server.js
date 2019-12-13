@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
   app.get('/events/:shortid', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'event.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'public', 'event.html'));
   });
 };
 
