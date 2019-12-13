@@ -5,7 +5,6 @@ const passport = require("./config/passport");
 const bodyParser = require("body-parser");
 const compareCalls = require('./config/middleware/compareCalls');
 const { getUpcoming } = require("./config/calls");
-const exphbs = require("express-handlebars");
 
 // Sets up the Express App
 // =============================================================
@@ -28,10 +27,7 @@ app.use(bodyParser());
 // Static directory
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-}
-
-// Handlebars engine
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+};
 
 // Check for new calls and compare them with current loaded upcoming call
 app.use(compareCalls());
