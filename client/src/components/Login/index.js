@@ -47,7 +47,7 @@ const Login = function () {
 
   const renderRedirect = () => {
     if (redirect) {
-      return <Redirect to='/home' />
+      return <Redirect to='/' />
     }
   }
 
@@ -90,20 +90,6 @@ const Login = function () {
               </Form>
             </Col>
           </row>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
         </Container>
       </div>
     </div>

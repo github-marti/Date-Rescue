@@ -59,7 +59,7 @@ function Home() {
 
     const renderRedirect = () => {
         if (redirect) {
-            return <Redirect to='/' />
+            return <Redirect to='/login' />
         };
     };
 
