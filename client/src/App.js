@@ -14,7 +14,8 @@ function App() {
       <div>
         <StoreProvider>
           <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/events/:shortid" component={EventPage} />
             <Route exact path="/home" component={Home} />
