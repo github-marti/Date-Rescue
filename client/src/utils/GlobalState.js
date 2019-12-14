@@ -173,7 +173,7 @@ const StoreProvider = ({ value = [], ...props }) => {
         hour = hour.substring(1);
       }
       let minutes = time.split(':')[1];
-      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : `${hour}:${minutes} AM`;
+      return hour > 12 ? `${(hour - 12)}:${minutes} PM` : hour = 12 ? `${hour}:${minutes} PM` : `${hour}:${minutes} AM`;
     },
     handleInputChange: event => {
       let name = event.target.name;
