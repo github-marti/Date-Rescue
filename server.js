@@ -28,7 +28,6 @@ app.use(bodyParser());
 app.use(compareCalls());
 
 // Routes
-// =============================================================
 require("./routes/call-api-routes")(app);
 require("./routes/event-api-routes")(app);
 require("./routes/location-api-routes")(app);
@@ -46,11 +45,12 @@ if (process.env.NODE_ENV === 'production') {
 };
 
 // Syncing our sequelize models and then starting our Express app
-// =============================================================
 db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });
 
+
+// Get upcoming call from database
 getUpcoming();
