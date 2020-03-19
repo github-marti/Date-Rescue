@@ -15,9 +15,7 @@ function Home() {
     useEffect(() => {
         userAPI.getUser()
             .then(results => {
-                console.log('INITIAL RESULTS', results)
                 if (results.data) {
-                    console.log("user results", results.data);
                     dispatch({
                         type: LOGIN_USER,
                         username: results.data.username,
@@ -35,7 +33,6 @@ function Home() {
                             console.log(err);
                         })
                 } else {
-                    console.log('no user')
                     setRedirect(true);
                 }
             })
@@ -53,7 +50,6 @@ function Home() {
     };
 
     const handleLogout = () => {
-        console.log('click');
         userAPI.logout();
         setRedirect(true);
     }
