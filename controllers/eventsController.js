@@ -3,7 +3,7 @@ const shortid = require("shortid");
 
 module.exports = {
   getAll: function(req, res) {
-    if (user.id) {
+    if (req.user) {
       db.Event.findAll({
         include: [{ model: db.Call }],
         where: {

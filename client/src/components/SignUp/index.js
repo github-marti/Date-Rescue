@@ -51,11 +51,11 @@ function SignUp() {
     <div className="signUp">
       {renderRedirect()}
       <br></br>
-      <span class="logo">
+      <span className="logo">
         <img src={require("./redblock2.png")} height="150" width="200" alt="logo"/>
       </span>
       <Container className="sign">
-        <row>
+        <div>
           <Col sm="12" md={{ size: 6, offset: 3 }}>
             <Form className="form" onSubmit={handleFormSubmit}>
               <Col>
@@ -104,13 +104,7 @@ function SignUp() {
               </Button>
             </Form>
           </Col>
-        </row>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        </div>
       </Container>
     </div>
   );
