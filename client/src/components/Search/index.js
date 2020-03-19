@@ -37,6 +37,7 @@ function Search() {
       />
       <input className="form-control" id="autocomplete" name="event_location" onChange={state.handleInputChange} />
       <iframe
+        title="google-maps"
         className="map-container"
         width="300"
         height="300"

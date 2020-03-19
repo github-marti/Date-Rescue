@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   let Call = sequelize.define("Call", {
     call_time: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         len: [1]

@@ -23,11 +23,6 @@ function ViewCard() {
         setLikebtn(!likebtn)
     }
 
-    function saveLocation(obj){
-        setShow(false)
-        API.saveLocation(obj)
-    }
-
     function handleSearchChange(event) {
         console.log(event.target.value);
         console.log("this is state: ", state )
@@ -52,12 +47,12 @@ function ViewCard() {
             })
             console.log(data.data)
         })
-    }, [likebtn, show])
+    }, [likebtn, show, dispatch])
 
     return (
         <div id="bgi">
             <nav className="navbar navbar-light" id="nav">
-                <a className="navbar-brand" id="text">Have a recommendation that is not listed? Click<Button onClick={handleShow} id="link">here</Button>to add one.</a>
+                <span className="navbar-brand" id="text">Have a recommendation that is not listed? Click<Button onClick={handleShow} id="link">here</Button>to add one.</span>
                 <form className="form-inline">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search By City" aria-label="Search" onChange={e => handleSearchChange(e)} />
                 </form>

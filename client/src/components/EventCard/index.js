@@ -15,7 +15,7 @@ function EventCard(props) {
     const [cancelShow, setCancelShow] = useState(false);
 
     useEffect(() => {
-        console.log(state);
+
     }, [state.reload]);
 
     const handleShow = event => {
@@ -89,7 +89,6 @@ function EventCard(props) {
             setUpdateShow(false);
         } catch (err) {
             console.log(err);
-            console.log('update unsuccessful');
         };
     };
 
@@ -140,7 +139,7 @@ function EventCard(props) {
                             {state.formatTime(props.event_time)}
                         </p>
                         <p>{props.event_location}</p>
-                        <iframe width="300" height="100" frameBorder="0"
+                        <iframe title="google-maps" width="300" height="100" frameBorder="0"
                             src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${props.event_location}`} allowFullScreen></iframe>
                         <p><span className="font-weight-bold">Notes: </span>{props.event_note}</p>
                         {props.call_time ?
@@ -150,7 +149,7 @@ function EventCard(props) {
                                 <p>Call type: {props.call_type}</p>
                             </div>) :
                             <p>You don't have a call scheduled.</p>}
-                        <p><img width="200px" src={props.event_date_picture}></img></p>
+                        <p><img width="200px" src={props.event_date_picture} alt="date"></img></p>
                         {(Date.parse(`${props.event_date.split('T')[0]}T${props.event_time}`) + 10800000) > new Date() && props.active ? (
                             <div>
                                 <CopyLink shortid={props.shortid} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Navbar, Nav, NavItem, NavLink } from 'reactstrap';
 import "./style.css";
 
 const NavTop = function (props) {
@@ -10,7 +10,7 @@ const NavTop = function (props) {
                 <Nav className="mr-auto" navbar>
                 <NavItem className="ml-auto">
                         <span className="logo">
-                            <img src={require("./redblock2.png")} height="75" width=""/>
+                            <img src={require("./redblock2.png")} height="75" width="" alt="logo"/>
                         </span>
                     </NavItem>
                     <NavItem>

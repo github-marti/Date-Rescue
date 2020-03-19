@@ -6,7 +6,7 @@ function CancelModal(props) {
     return (
         <Modal isOpen={props.show}>
             <ModalHeader closeButton>
-                <h3>Cancel Date</h3>
+                <p>Cancel Date</p>
             </ModalHeader>
             <ModalBody>
                 <p>Ready to cancel your date? If so, click the "Cancel Date" button below and friends will no longer be able to access the link you gave them.</p> 

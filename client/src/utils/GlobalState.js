@@ -117,7 +117,6 @@ const reducer = (state, action) => {
       }
 
     case ADD_LIKE:
-      console.log("addinglike")
       return {
         ...state,
         likes: state.locations.map(location => {
@@ -129,7 +128,6 @@ const reducer = (state, action) => {
       }
 
     case ADD_DISLIKE:
-      console.log("addingdislike")
       return {
         ...state,
         dislikes: state.locations.map(location => {
@@ -150,9 +148,10 @@ const StoreProvider = ({ value = [], ...props }) => {
     username: "",
     userid: 0,
     reload: false,
-    authenticated: false,
     autocomplete: "",
-    newEvent: {},
+    newEvent: {
+      event_date: new Date(),
+    },
     upcomingCall: {},
     upcomingText: {},
     locations: [{

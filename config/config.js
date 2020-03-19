@@ -3,7 +3,7 @@ module.exports = {
     "development": {
         "username": "root",
         "password": process.env.DB_PASSWORD,
-        "database": "sampleDB",
+        "database": "daterescue_DB",
         "host": "127.0.0.1",
         "dialect": "mysql",
         "operatorsAliases": false

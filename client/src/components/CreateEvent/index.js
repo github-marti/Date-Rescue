@@ -16,7 +16,7 @@ function CreateEvent() {
     const [dropdownOpen, setDropdown] = useState(false);
 
     useEffect(() => {
-        console.log('state', state);
+        
     }, [state.active, show]);
 
     const handleClose = () => {
@@ -32,7 +32,6 @@ function CreateEvent() {
     };
 
     const handleFormSubmit = async event => {
-        console.log("EVENT DATE ON SUBMIT", state.newEvent.event_date);
         event.preventDefault();
         let initialEvent = await API.saveEvent({
             event_name: state.newEvent.event_name,
@@ -46,7 +45,8 @@ function CreateEvent() {
             newEvent: initialEvent.data
         });
         let eventImage = document.getElementById('event_image').files[0];
-        let eventid = initialEvent.data.id
+        let eventid = initialEvent.data.id;
+
         // proceed to save call if user selected to receive a call
         if (state.newEvent.call_time) {
             API.saveCall(eventid, {
@@ -78,16 +78,16 @@ function CreateEvent() {
     return (
         <div className="card-body">
             <label className="font-weight-bold">Name Your Date</label>
-            <p><input className="form-control" type="text" name="event_name" required onChange={state.handleInputChange} /></p>
+            <div><input className="form-control" type="text" name="event_name" required onChange={state.handleInputChange} /></div>
             <label className="font-weight-bold"> Set Date Time</label>
-            <p>
+            <div>
                 <DatePicker className="mr-8" value={state.newEvent && state.newEvent.event_date ? new Date(state.newEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
                 <TimePicker onChange={state.handleTimeChange} disableClock={true} />
-            </p>
+            </div>
             <label className="font-weight-bold">Set Date Location</label>
-            <p><Search /></p>
+            <div><Search /></div>
             <label className="font-weight-bold">Add Notes (optional)</label>
-            <p><textarea className="form-control" name="event_note" onChange={state.handleInputChange} /></p>
+            <div><textarea className="form-control" name="event_note" onChange={state.handleInputChange} /></div>
             <div className="call-container">
                 <label className="font-weight-bold">Schedule a Call (optional)</label>
                 <div><TimePicker onChange={state.handleCallTime} disableClock={true} /></div>
@@ -103,8 +103,8 @@ function CreateEvent() {
                 </ButtonDropdown>
             </div>
             <label className="font-weight-bold">Image Upload (optional)</label>
-            <p><input type="file" id="event_image" /></p>
-            <p><button className="btn btn-primary mx-auto" onClick={handleFormSubmit} id="submit-button">Submit</button></p>
+            <div><input type="file" id="event_image" /></div>
+            <div><button className="btn btn-primary mx-auto" onClick={handleFormSubmit} id="submit-button">Submit</button></div>
             <EventModal show={show} handleClose={handleClose} />
 
         </div>

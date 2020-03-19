@@ -17,7 +17,6 @@ class EventPage extends React.Component {
     async componentDidMount() {
         const { shortid } = this.props.match.params;
         let eventData = await API.getEventByShortId(shortid);
-        console.log(eventData.data);
         this.setState({
             event_name: eventData.data.event_name,
             event_date: eventData.data.event_date,
@@ -46,10 +45,10 @@ class EventPage extends React.Component {
                         <p><span className="font-weight-bold">Date:</span> <Moment date={this.state.event_date} format="MMMM Do YYYY" /></p>
                         <p><span className="font-weight-bold">Time:</span> {this.formatTime(this.state.event_time)}</p>
                         <p><span className="font-weight-bold">Location:</span> {this.state.event_location}</p>
-                        <iframe width="300" height="200" frameBorder="0"
+                        <iframe title="google-maps" width="300" height="200" frameBorder="0"
                             src={`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${this.state.event_location}`} allowFullScreen></iframe>
                         <p><span className="font-weight-bold">Note:</span> {this.state.event_note}</p>
-                        <p><img width="300px" src={this.state.event_date_picture}></img></p>
+                        <p><img width="300px" src={this.state.event_date_picture} alt="date"></img></p>
                     </div>
                 </div>
             )

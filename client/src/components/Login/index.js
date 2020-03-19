@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Container, Col, Form, FormGroup, Label, Input, Button, } from 'reactstrap';
@@ -14,11 +14,7 @@ const Login = function () {
     signup: false
   });
 
-  const [_, dispatch] = useStoreContext();
-
-  useEffect(() => {
-    console.log("redirectState");
-  }, [redirect])
+  const [state, dispatch] = useStoreContext();
 
   const handleOnChange = event => {
     let name = event.target.name;
@@ -34,7 +30,7 @@ const Login = function () {
     event.preventDefault();
     axios.post('/api/login', user)
       .then(res => {
-        console.log(res);
+        console.log(state);
         dispatch({
           type: LOGIN_USER,
           username: res.data.username,
@@ -68,11 +64,11 @@ const Login = function () {
     <div>
       {renderRedirect()}
       <div className="bcg1">
-        <span class="logo">
-          <img src={require("./redblock2.png")} height="150" width="200" />
+        <span className="logo">
+          <img src={require("./redblock2.png")} height="150" width="200" alt="logo"/>
         </span>
         <Container className="login">
-          <row>
+          <div>
             <Col sm="12" md={{ size: 6, offset: 3 }}>
               <Form className="form" onSubmit={handleFormSubmit}>
                 <Col>
@@ -102,7 +98,7 @@ const Login = function () {
                 <Button className="btn1" color="success">Log In</Button>
               </Form>
             </Col>
-          </row>
+          </div>
         </Container>
       </div>
     </div>

@@ -6,7 +6,6 @@ import { SET_UPCOMING_EVENT } from '../../utils/actions';
 
 function UpcomingEvent() {
     const [state, dispatch] = useStoreContext();
-    console.log('state', state);
 
     useEffect(() => {
         API.getEvents(state.userid)
@@ -21,7 +20,7 @@ function UpcomingEvent() {
                     });
                 };
             });
-    }, [state.reload]);
+    }, [state.reload, state.userid, dispatch]);
 
     return (
         <div>

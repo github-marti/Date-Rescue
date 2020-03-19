@@ -39,7 +39,7 @@ function Home() {
             .catch(err => {
                 console.log(err)
             });
-    }, [redirect]);
+    }, [redirect, state.userid, dispatch]);
 
     const handleClick = event => {
         let name = event.target.name;

@@ -36,6 +36,7 @@ function CreateCard(props) {
             <p>{props.data.location_address}</p>
             <p>{props.data.location_city}, {props.data.location_state}. {props.data.location_zip}</p>
             <iframe
+                title="google-maps"
                 className="map-container"
                 width="300"
                 height="200"
