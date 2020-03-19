@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -14,10 +14,6 @@ function CreateEvent() {
     const [state, dispatch] = useStoreContext();
     const [show, setShow] = useState(false);
     const [dropdownOpen, setDropdown] = useState(false);
-
-    useEffect(() => {
-        
-    }, [state.active, show]);
 
     const handleClose = () => {
         setShow(false);
