@@ -13,6 +13,10 @@ Best of all, Date Rescue allows users the option to schedule a "rescue call" at 
 Date Rescue's final feature is a Recommendations page with a list of user-recommended bars that they found perfect for that awkward first date. Find a bar in town that has good lighting and easy bathroom access? Create a recommendation on the app and let other users know! Recommendations will even show whether the venue offers "angel shots," a codeword that, when ordered, alerts the bar/restaurant staff that the customer is feeling uncomfortable and needs help getting out of their date.
 
 
+# Deployed Page
+https://date-rescue.herokuapp.com/
+
+
 # Future Development
 
 - Customizable call-types that will allow users to choose what sort of rescue call they will receive.
