@@ -8,7 +8,7 @@ function EventModal (props) {
 
     return (
         <div>
-            {state.newEvent ? (
+            {state.upcomingEvent ? (
                 <Modal isOpen={props.show} onHide={props.handleClose}>
                 <ModalHeader closeButton>
                     <h3>Date Saved</h3>
@@ -16,7 +16,7 @@ function EventModal (props) {
                 <ModalBody>
                     <p>Your date has been successfully saved!</p>
                     <p>Here is your unique date page link that you can share with friends.</p>
-                    <CopyLink shortid={state.newEvent.shortid} />
+                    <CopyLink shortid={state.upcomingEvent.shortid} />
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="primary" onClick={props.handleClose}>

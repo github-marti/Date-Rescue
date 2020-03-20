@@ -42,8 +42,8 @@ function Search() {
         width="300"
         height="300"
         frameBorder="0"
-        src={state.newEvent ?
-          `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${state.newEvent.event_location}`
+        src={state.upcomingEvent ?
+          `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=${state.upcomingEvent.event_location}`
           : `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_API_KEY}&q=Los+Angeles`}
         allowFullScreen>
       </iframe>

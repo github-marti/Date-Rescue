@@ -65,13 +65,13 @@ const reducer = (state, action) => {
     case SET_NEW_EVENT:
       return {
         ...state,
-        newEvent: action.newEvent
+        upcomingEvent: action.upcomingEvent
       }
 
     case SET_UPCOMING_EVENT:
       return {
         ...state,
-        upcomingEvent: action.event
+        upcomingEvent: action.upcomingEvent
       }
 
     case SET_ALL_EVENTS:
@@ -83,8 +83,8 @@ const reducer = (state, action) => {
     case UPDATE_EVENT:
       return {
         ...state,
-        newEvent: {
-          ...state.newEvent,
+        upcomingEvent: {
+          ...state.upcomingEvent,
           [action.column]: action.update
         }
       }
@@ -92,7 +92,7 @@ const reducer = (state, action) => {
     case COMPLETE_EVENT:
       return {
         ...state,
-        newEvent: {},
+        upcomingEvent: {},
         allEvents: [
           ...state.allEvents,
           action.completedEvent
@@ -149,11 +149,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     userid: 0,
     reload: false,
     autocomplete: "",
-    newEvent: {
-      event_date: new Date(),
-    },
-    upcomingCall: {},
-    upcomingText: {},
+    upcomingEvent: {},
     locations: [{
       id: 0,
       locationName: "",
@@ -192,8 +188,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       };
     },
     handleDateChange: date => {
-      let eventDate = moment.utc(date).local().format();
-      console.log("EVENT DATE", eventDate);
+      let eventDate = moment(date).local().format();
       dispatch({
         type: UPDATE_EVENT,
         column: "event_date",
@@ -208,10 +203,12 @@ const StoreProvider = ({ value = [], ...props }) => {
       });
     },
     handleCallTime: time => {
+      let callUTC = moment(`${state.upcomingEvent.event_date.split('T')[0]}T${time}`).unix();
+      console.log(callUTC);
       dispatch({
         type: UPDATE_EVENT,
-        column: "call_time",
-        update: time
+        column: "call_utc",
+        update: callUTC
       })
     }
 

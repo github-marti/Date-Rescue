@@ -5,6 +5,10 @@ export default {
     getEvents: function (userid) {
         return axios.get(`/api/users/${userid}/events`);
     },
+    // Gets upcoming event
+    getUpcoming: function (userid) {
+        return axios.get(`/api/users/${userid}/upcoming`);
+    },
     // Gets the event with the given id
     getEvent: function (userid, eventid) {
         return axios.get(`/api/users/${userid}/events/${eventid}`);

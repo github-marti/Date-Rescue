@@ -16,6 +16,7 @@ const path = require('path');
 
 module.exports = function (app) {
   app.get("/api/users/:userid/events", eventsController.getAll);
+  app.get("/api/users/:userid/upcoming", eventsController.getUpcoming);
   app.get("/api/users/:userid/events/:id", eventsController.getOne);
   app.get("/api/events/:shortid", eventsController.getByShortId);
   app.post("/api/events", eventsController.create);

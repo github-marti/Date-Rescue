@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TimePicker from 'react-time-picker';
 import DatePicker from 'react-date-picker';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -15,6 +15,10 @@ function CreateEvent() {
     const [show, setShow] = useState(false);
     const [dropdownOpen, setDropdown] = useState(false);
 
+    useEffect(() => {
+        console.log(state);
+    }, [])
+
     const handleClose = () => {
         setShow(false);
         dispatch({
@@ -29,28 +33,28 @@ function CreateEvent() {
 
     const handleFormSubmit = async event => {
         event.preventDefault();
+        // first the event details are saved, as that information is needed for saving calls and images
         let initialEvent = await API.saveEvent({
-            event_name: state.newEvent.event_name,
-            event_date: state.newEvent.event_date.split('T')[0],
-            event_time: state.newEvent.event_time,
-            event_location: state.newEvent.event_location,
-            event_note: state.newEvent.event_note,
+            event_name: state.upcomingEvent.event_name,
+            event_utc: Date.parse(`${state.upcomingEvent.event_date.split('T')[0]}T${state.upcomingEvent.event_time}`),
+            event_location: state.upcomingEvent.event_location,
+            event_note: state.upcomingEvent.event_note,
         });
         dispatch({
             type: SET_NEW_EVENT,
-            newEvent: initialEvent.data
+            upcomingEvent: initialEvent.data
         });
         let eventImage = document.getElementById('event_image').files[0];
         let eventid = initialEvent.data.id;
 
         // proceed to save call if user selected to receive a call
-        if (state.newEvent.call_time) {
+        if (state.upcomingEvent.call_utc) {
             API.saveCall(eventid, {
-                call_time: state.newEvent.call_time,
-                event_date: state.newEvent.event_date.split('T')[0],
-                call_type: state.newEvent.call_type
+                call_utc: state.upcomingEvent.call_utc,
+                call_type: state.upcomingEvent.call_type
             })
         };
+
         // proceed to save image and update event with image link if image is detected AND initial event data was saved
         if (eventImage && initialEvent.data) {
             let formData = new FormData();
@@ -77,7 +81,7 @@ function CreateEvent() {
             <div><input className="form-control" type="text" name="event_name" required onChange={state.handleInputChange} /></div>
             <label className="font-weight-bold"> Set Date Time</label>
             <div>
-                <DatePicker className="mr-8" value={state.newEvent && state.newEvent.event_date ? new Date(state.newEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
+                <DatePicker className="mr-8" value={state.upcomingEvent && state.upcomingEvent.event_date ? new Date(state.upcomingEvent.event_date) : null} onChange={state.handleDateChange} minDate={new Date()} />
                 <TimePicker onChange={state.handleTimeChange} disableClock={true} />
             </div>
             <label className="font-weight-bold">Set Date Location</label>
@@ -89,7 +93,7 @@ function CreateEvent() {
                 <div><TimePicker onChange={state.handleCallTime} disableClock={true} /></div>
                 <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
                     <DropdownToggle caret>
-                        {state.newEvent && state.newEvent.call_type ? state.newEvent.call_type : "Call Type"}
+                        {state.upcomingEvent && state.upcomingEvent.call_type ? state.upcomingEvent.call_type : "Call Type"}
                     </DropdownToggle>
                     <DropdownMenu>
                         <DropdownItem name="call_type" onClick={state.handleInputChange}>Best Friend Breakup</DropdownItem>

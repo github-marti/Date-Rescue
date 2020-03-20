@@ -5,7 +5,7 @@ const shortid = require("shortid");
 // middleware for comparing any new scheduled calls with the most recent upcoming call in the database
 module.exports = function () {
     return function (req, res, next) {
-        if (req.body && req.body.call_time) {
+        if (req.body && req.body.call_utc) {
             req.shortid = shortid.generate();
 
             // find the upcoming call from the database
@@ -13,20 +13,20 @@ module.exports = function () {
                 include: [
                     {
                         model: db.Event,
-                        attributes: ['event_date'],
+                        attributes: ['event_utc'],
                     }
                 ],
                 order: [
-                    ['call_time', 'ASC']
+                    ['call_utc', 'ASC']
                 ]
             })
                 .then(results => {
-                    let newCall = Date.parse(new Date(`${req.body.event_date}T${req.body.call_time}:00.000`));
+                    let newCall = req.body.call_utc;
                     let phoneNumber = req.user.phoneNumber;
 
                     // if an upcoming call was found, compare the upcoming call time with the newly saved call time
                     if (results) {
-                        let upcomingCall = Date.parse(new Date(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`));
+                        let upcomingCall = results.call_utc;
 
                         // if the new call is sooner in the future than the upcoming call, update the server-side timer to the new call
                         if (newCall < upcomingCall) {

@@ -10,7 +10,7 @@ const getUpcoming = () => {
         include: [
             {
                 model: db.Event,
-                attributes: ['event_date'],
+                attributes: ['event_utc'],
                 include: [
                     {
                         model: db.User,
@@ -20,12 +20,12 @@ const getUpcoming = () => {
             }
         ],
         order: [
-            ['call_time', 'ASC']
+            ['call_utc', 'ASC']
         ]
     })
         .then(results => {
             if (results) {
-                let upcomingCall = Date.parse(`${results.Event.event_date.split('T')[0]}T${results.call_time}:00.000`);
+                let upcomingCall = results.call_utc;
                 let currentTime = Date.parse(new Date());
                 let callid = results.shortid;
                 console.log("shortid in getupcoming", callid);

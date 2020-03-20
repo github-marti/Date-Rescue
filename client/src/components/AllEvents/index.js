@@ -4,6 +4,7 @@ import API from '../../utils/eventAPI';
 import EventCard from '../EventCard';
 import { SET_ALL_EVENTS } from '../../utils/actions';
 import './style.css';
+import { prefixedCollapsibleMap } from 'twilio/lib/base/serialize';
 
 function AllEvents() {
     const [state, dispatch] = useStoreContext();
@@ -29,12 +30,11 @@ function AllEvents() {
                             key={event.shortid}
                             id={event.id}
                             event_name={event.event_name}
-                            event_date={event.event_date}
-                            event_time={event.event_time}
+                            event_utc={event.event_utc}
                             event_location={event.event_location}
                             event_note={event.event_note}
                             event_date_picture={event.event_date_picture}
-                            call_time={event.Call ? event.Call.call_time : null}
+                            call_utc={event.Call ? event.Call.call_utc : null}
                             call_type={event.Call ? event.Call.call_type : null}
                             callid={event.Call ? event.Call.id : null}
                             active={event.active}

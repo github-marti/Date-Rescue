@@ -1,5 +1,6 @@
 const db = require("../models");
 const shortid = require("shortid");
+const { Op } = require("sequelize");
 
 module.exports = {
   getAll: function(req, res) {
@@ -9,16 +10,31 @@ module.exports = {
         where: {
           UserId: req.user.id
         },
-        order: [
-          ["event_date", "ASC"],
-          ["event_time", "ASC"]
-        ]
+        order: [["event_utc", "ASC"]]
       })
         .then(results => res.json(results))
         .catch(err => {
           console.log(err);
           res.send(err);
         });
+    }
+  },
+  getUpcoming: function(req, res) {
+    if (req.user) {
+      db.Event.findOne({
+        include: [{ model: db.Call }],
+        where: {
+          UserId: req.user.id,
+          active: 1,
+          event_utc: {
+            [Op.gte]: Date.parse(new Date())
+          }
+        }
+      })
+      .then(results => res.json(results))
+      .catch(err => {
+        res.send(err);
+      })
     }
   },
   getOne: function(req, res) {
@@ -38,17 +54,13 @@ module.exports = {
       }
     })
       .then(results => {
-        // get the createdAt date from the results
-        let eventDate = Date.parse(
-          `${results.dataValues.event_date.split("T")[0]}T${
-            results.dataValues.event_time
-          }`
-        );
+        // get the date utc time from the results
+        let eventDate = results.dataValues.event_utc;
 
         // get the current time and set it to UTC time
         let currentDate = Date.parse(new Date());
 
-        // compare the createdAt date and current time
+        // compare the date utc time and current time
         if (results.dataValues.active && eventDate + 43200000 > currentDate) {
           res.send(results);
         } else {
@@ -62,8 +74,7 @@ module.exports = {
   },
   create: function(req, res) {
     db.Event.create({
-      event_date: req.body.event_date,
-      event_time: req.body.event_time,
+      event_utc: req.body.event_utc,
       event_name: req.body.event_name,
       event_location: req.body.event_location,
       event_note: req.body.event_note,
@@ -81,7 +92,6 @@ module.exports = {
   },
   uploadImage: function(req, res) {
     if (req.file) {
-      console.log("req.file detected");
       let filename = req.file.filename;
       db.Event.update(
         { event_date_picture: `/images/${filename}` },
@@ -106,6 +116,7 @@ module.exports = {
   },
   cancel: function(req, res) {
     db.Event.update(
+      // change shortid and change active status to false so outsiders can access date information
       { shortid: shortid.generate(), active: false },
       { where: { id: req.params.id } }
     )

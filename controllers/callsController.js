@@ -32,7 +32,7 @@ module.exports = {
     },
     create: function (req, res) {
         db.Call.create({
-            call_time: req.body.call_time,
+            call_utc: req.body.call_utc,
             call_type: req.body.call_type,
             shortid: req.shortid,
             EventId: req.params.eventid
@@ -46,7 +46,7 @@ module.exports = {
     update: function (req, res) {
         console.log('shortid in update', req.shortid);
         db.Call.update({
-            call_time: req.body.call_time,
+            call_utc: req.body.call_utc,
             call_type: req.body.call_type,
             shortid: req.shortid
         },
